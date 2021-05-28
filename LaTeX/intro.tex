@@ -1,0 +1,263 @@
+% Author: Matthew Turner
+
+\documentclass[11pt,letterpaper]{article}
+% \documentclass[11pt]{report}
+% \documentclass{report}
+% \documentclass{book}
+\usepackage[bookmarks,hidelinks]{hyperref}
+\usepackage{amssymb,amsmath}
+% \usepackage{fullpage}
+\usepackage{tabulary}
+\usepackage{tabularx}
+\usepackage{float}
+% \usepackage[margin=1.00in]{geometry}
+\usepackage[margin=0.90in]{geometry}
+
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{pslatex}
+\usepackage{apacite}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\usepackage{wrapfig}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{setspace}
+\doublespace
+% \usepackage{url}
+\usepackage{bigfoot}
+\usepackage[export]{adjustbox}
+\setlength\intextsep{0pt}
+
+\usepackage{graphicx}
+
+\title{Introduction to the dissertation}
+
+\author{{Matthew A.~Turner}}
+
+\begin{document}
+\maketitle
+
+In this dissertation I present solutions to modest subproblems in
+the following complex, computational social science problem. 
+The big problem from 30,000 feet is to calculate the societal impact of a common
+communication strategy used by mass media outlets, namely cable TV news. 
+This communication strategy, metaphorical violence, is known to increase 
+extremism including support for real world violence to achieve political goals. 
+This increased support for political violence is even more pronounced among the most trait 
+aggressive individuals in a population. To explain shifts in opinions due to
+interpersonal influence via communication it is necessary to accurately measure 
+differences in opinions, which I will show is no trivial task---in fact, several
+dozen studies on rising extremism among isolated groups are unreliable due to
+a mismatch between the psychological model of opinions assumed in these 
+studies and ordinal scale measurement schemes, e.g., Likert scale measurements.
+In the most basic case, it is not clear how extremism and polarization depend
+on social structure such as social influence networks or initial extremism
+and polarization in a society. Similarly, it is not clear how miscommunication
+and random chance would affect extremism and polarization outcomes either.
+All these factors, and likely others not covered here, must be accounted for
+in order to make predictions about the emergence of extremism and polarization.
+
+To begin examining this complex social problem it is important to understand
+the nature of metaphorical violence use on cable news. Metaphors in
+political discourse are generally important to understand because metaphors
+connect the abstract conceptual domain of politics to any number of more
+embodied physical domains, such a footrace, a sinking ship, or a fight~\cite{Charteris-Black2009}.
+We limit our focus to particularly important times in the United
+States: around the time of the presidential debates and election in the 
+USA in 2012 and 2016. This lays the foundation for predicting how much
+more likely political violence is around the time of the elections, just due
+to the seemingly insignificant effect of metaphorical violence on opinions.
+We developed several cyberinfrastructure tools to 
+acquire, annotate, and analyze cable TV transcripts provided by the TV News
+Archive\footnote{https://archive.org/tv/}. I also developed a dynamic, explanatory 
+statistical modeling approach used to calculate when and by how much violence metaphor 
+usage changes around the debates and election.
+
+In order to measure changes in opinions (or attitudes, beliefs, etc.) one must
+provide experiment participants a measurement instrument on which to 
+indicate their opinion value. 
+
+Before we develop predictive models with complex mechanisms such as 
+metaphorical violence use, we should understand how and when simple, empirically motivated
+models predict the emergence of extremism and polarization, or their opposite,
+consensus. For this I developed an agent-based model of social influence and
+netowrk structure effects...~\cite{Turner2018}
+
+
+(THEN WHAT?)
+
+% \begin{itemize}
+%   \item
+%     This dissertation presents multi-method tools and multi-scale and -dimensional
+%     insights into the cognitive, social, and communicative foundations of rising extremism and
+%     polarization.
+%     \begin{itemize}
+%       \item 
+%         Cognitive factors include mechanisms of social influence within
+%         individuals, such as one's openness or stubbornness and how one
+%         is attracted to or repulsed from others' opinions.
+%       \item
+%         Social factors in this work are mainly considerations of how social
+%         networks and societal norms of computational and real-world actors
+%         influence those actors' behaviors.
+%       \item
+%         Communicative factors in this case are those features of language or other media that
+%         have an effect on how 
+%       \item
+%         Because human groups and societies are complex systems, we can only
+%         ever learn a little at a time through specialized methods and approaches.
+%     \end{itemize}
+%   \item
+%     In this dissertation I first use empirically-motivated computational modeling 
+%     to explain and predict rising extremism among small, socially isolated 
+%     groups and show that existing methods for studying such rising extremism
+%     have resulted in plausibly false detections of group polarization.
+%     \begin{itemize}
+%       \item
+%         In the next part of the paper I analyze how extremism and polarization
+%         emerge in small societies based on the same model used to explain
+%         and predict rising extremism in small, isolated, biased groups.
+%         In this part I also examine the hypothetical effects of increasingly
+%         connected social networks and miscommunication on the emergence of
+%         extremism and polarization.
+%       \item
+%         In a complementary analysis of a different target system with different
+%         methods, I developed new cyberinfrastructure tools to build and analyze
+%         a corpus of US cable news to analyze metaphorical violence use,
+%         which an important communication strategy
+%         that has been shown to increase extremism and the likelihood of
+%         real world violence~\cite{Kalmoe2014,Kalmoe2018}.
+%       \item
+%         Compiling my dissertation research has opened several routes for future
+%         work, including developing new tests of my explanation for rising extremism
+%         in isolated groups, and more general investigations of the roles for,
+%         and schema that describe, different kinds of models and analyses 
+%         in the study of complex human social systems.
+%     \end{itemize}
+
+% \subsection{Notes on studying extremism and polarization as emergent dynamics}
+
+% Rising extremism and social and political polarization across a wide range
+% of issues are emergent properties of extremely complex systems---human
+% social systems. I do this partly to develop theoretical intuition into the
+% problem of rising extremism and polarization. I also do this to explain why,
+% despite their very different methodologies, the computational modeling work
+% and the corpus-based metaphorical violence work both indeed contribute to 
+% understanding extremism and polarization.
+
+%   \begin{itemize}
+%     \item
+%       When we think about trying to find solutions to these problems
+%       we have to first recognize that our knowledge of complex systems must
+%       necessarily be built up piecemeal. 
+%     \item
+%       Complex systems are characterized by the operation of processes
+%       occurring at different scales of complexity, where processes at one 
+%       scale can have an effect on processes at other scales. 
+%     \item
+%       Therefore it is necessary to perform a sort of dimensionality reduction
+%       that has the additional effect of theoretically walling out potentially
+%       many important cognitive and social factors in order to learn more about
+%       some small subset of cognitive and social factors.
+%     \item
+%       One must not only determine theoretical limits of experiments and
+%       analyses, but also the scale to study a particular effect. Social
+%       neuroscientists may study neural correlates of attitude change that
+%       occur over milliseconds or seconds, while anthropologists and
+%       historians might study attitude change over several years, up to centuries and
+%       millenia.
+%     \item
+%       One must also choose what sort of knowledge one hopes to gain about a 
+%       system, which depends on how much is already known about systems of
+%       interest. Models can vary on several important dimensions in this regard,
+%       most importantly for us is distinguishing ``how-possibly'' from
+%       ``how-actually'' models. Statistical models exist mainly to process
+%       data, but also express important, possibly unexplained relationships
+%       between observables. Explanations must follow for us to trust and
+%       utilize the results~\cite{Craver2006}.
+%   \end{itemize}
+
+% \end{itemize}
+
+% \subsection{Real world polarization and extremism}
+
+% \subsection{``Group polarization'': initially biased groups become more extreme}
+
+% \subsection{Simulation as a tool for studying social behavior and outcomes}
+
+% \subsection{The communication strategy of metaphorical violence}
+
+% \begin{itemize}
+%   \item
+%     In the theoretical model I developed for studying extremism and polarization,
+%     communication was assumed to be highly idealized: model agents communicated
+%     their opinions in numerical form to other agents, possibly modulated by
+%     random noise. In this section we explain an important detail such an 
+%     approach obscures: the effect of different rhetorical strategies on
+%     extremism and polarization. Among the many possible rhetorical strategies
+%     we focus on metaphor. This is sensible for two reasons: first because 
+%     Second, understanding metaphor is theoretically important in cognitive science 
+%     because we seem to scaffold our knowledge about the world in terms of
+%     metaphor~\cite{Lakoff1980,Lakoff2000,Gibbs2006,Kovecses2010a,Gibbs2011,Nunez2012,Matlock2012}
+%   \item 
+%     First we need to know what a metaphor is and why metaphors are important
+%     generally---briefly, metaphor is a rhetorical device that maps some more
+%     abstract concept, such as love, onto a more concrete object, such as 
+%     a flower. One cannot hold love, but one can hold, see, and smell a flower.
+%   \item
+%     Then we can understand what metaphorical violence is (or, equivalently, what
+%     violence metaphors are). They are metaphors that map some abstract concept
+%     to some form of violence. Specifically, since I am most interested in 
+%     extremism and polarization in politics, I study metaphorical violence in 
+%     political discourse on cable news. In this case, the abstract concepts
+%     to be mapped on to violent behaviors, such as ``attacking'', ``fighting'',
+%     ``punching'', etc., including war metaphors \cite{Flusberg2018}.
+%   \item
+%     Metaphorical violence has been linked to increased support for violence
+%     to achieve political goals~\cite{Kalmoe2014,2018}. 
+%   \item
+%     More generally, whether or not metaphors are used in communication affects
+%     outcomes for speakers and listeners (or writers and readers)~\cite{Gann2011,Matlock2012a,Magaña2018}.
+% \end{itemize}
+
+
+% \subsection{Other cognitive, social, and communicative factors}
+
+% As discussed, one or a few studies can only examine a small fraction of the
+% entities and processes in complex human social systems.
+% \begin{itemize}
+%   \item
+%     Other cognitive factors:
+%     \begin{itemize}
+%       \item 
+%         Neural correlates of social influence~\cite{Cikara2014,Cikara2017}
+%     \end{itemize}
+%   \item
+%     Other sociological factors: 
+%     \begin{itemize}
+%       \item
+%         payoff maximization under unfair power dynamics~\cite{OConnor2019a}
+%       \item
+%         multiplex networks~\cite{Weatherall2020} 
+%         of large-scale social networks, e.g., on social media
+%     \end{itemize}
+%   \item 
+%     Other communication strategies:
+%     \begin{itemize}
+%       \item 
+%         Misinformation~\cite{OConnor2019e,OConnor2020b}.
+%       \item
+%         The effect of the affordances provided by social media
+%     \end{itemize}
+% \end{itemize}
+
+
+\bibliographystyle{apacite}
+
+\setlength{\bibleftmargin}{.125in}
+\setlength{\bibindent}{-\bibleftmargin}
+
+\bibliography{/Users/mt/workspace/papers/library.bib}
+
+\end{document}
