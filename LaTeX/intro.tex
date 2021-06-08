@@ -40,7 +40,7 @@
 % \vspace{-4in}
 % \maketitle
 
-\vspace{-2in}
+\vspace{-2.5in}
 \textbf{Communicative, cognitive, and social factors in
 extremism and polarization}
 \begin{abstract}
@@ -81,11 +81,12 @@ extremism and polarization}
   Taken together these studies advance our understanding of communicative,
   cognitive, and social factors in the emergence of extremism and polarization.
 \end{abstract}
-
+\hrule
+\vspace{2em}
 
 This dissertation takes on the widely studied topic of social polarization. 
 Polarization is a phenomenon where opposing social groups become more extreme
-in opposite directions~\cite{Bramson2016,Bramson2017,Jung2019,Klein2020}. 
+in opposite directions~\cite{Bramson2016,Bramson2017,Jung2019,Klein2020,StewartMcCBryson2020}. 
 Although polarization has been widely studied by a diversity of scientists,
 the topic is scientifically unwieldy because human societies are the things
 that become polarized, and human societies are highly complex systems. As the
@@ -96,7 +97,8 @@ humans?
 It is necessary to ``wall off'' small, specific subsystems within human
 societies in order to make the study of polarization (or any complex social
 phenomena) tractable~\cite{Cartwright1999}.
-This process requires us to simultaneously specify and generalize to develop models that
+This process requires us to simultaneously specify and generalize to 
+develop models that
 are simple enough to be interpreted but specific enough to be understood
 mechanically~\cite{Craver2006,Wimsatt2007,Smaldino2017,Turner2021}. In the end
 we develop studies that are very specific to the phenomena of interest
@@ -125,30 +127,121 @@ which refers to the tendency of small groups to become more extreme in their
 opinions on some topic or in their decision making. For example, a jury that
 has to decide damages for a civil liability lawsuit might increase the amount
 they are willing to award a victim of some wrongdoing~\cite{Schkade2000}.
+Group-level behaviors and traits emerge only when individuals interact
+and so must be studied independently from individual- and societal-level
+phenomena~\cite{Goldstone2008,Smaldino2014}.
 
 Unfortunately many or most of the empirical detections of group polarization
-are false positives, i.e., Type I errors or just ``false detections''. 
+are false positives, i.e., Type I errors or just
+``false detections''~\cite{Turner2021a}. This is due to a mismatch between 
+the assumption that opinions are drawn from a continuous, latent psychological
+distribution (e.g., a normal distribution) but reported on an ordinal
+scale (e.g., a Likert-type attitude/opinion scale).
 
 These focused studies where we narrowly walled off social subsystems do not
 address whether and when polarization can be reliably predicted at the
 societal scale. In my fourth and final study, I answered these questions
 based on general factors that affect predictions of political polarization, 
 including initial extremism and polarization in society, how reliably individuals
-can communicate, and social network structure. 
+can communicate, and social network structure. These models provide a
+\emph{how possibly} account of rising extremism and polarization in society,
+and can frame future empirical, computational, and theoretical work 
+studying rising extremism and polarization.
+
+In the course of my dissertation work, I ended up studying three very 
+different systems. Each required different computational modeling and analytical
+tools. I believe an important contribution of this dissertation are the
+cyberinfrastructure tools and approaches I have developed. In studying
+metaphorical violence use on cable news, I developed a custom Python API
+for searching, ingesting, and converting cable news transcripts from the
+Internet Archive's TV News Archive\footnote{\url{https://archive.org/tv}}. 
+I also developed a custom web application for finding, tracking, and annotating 
+potential instances of metaphor in TV News Archive transcripts. 
+In my work demonstrating false detections of group polarization, I adapted
+a general computational model of false detections for modeling why and how
+group polarization studies generate false discoveries. Finally, I developed and
+supported a simpler, more parsimonious and explanatory model of group polarization,
+and ``stress tested'' that model to see how reliably it could predict 
+extremism \emph{and} polarization under a variety of empirically motivated
+conditions.  These contributions are open
+source, available on GitHub. These tools can be used and extended by myself or
+others to potentially multiply the impact of the studies presented here.
+I was inspired by the emerging \emph{computational social science} approach
+to studying social systems, that focuses on using computational tools for
+modeling and analysis in order to understand emergent social 
+phenomena~\cite{Lazer2009}.
 
 
 \section{Rising extremism and polarization}
 
 Most broadly, the projects in this dissertation advance our understanding
-of extremism and polarization. It lays some groundwork for predicting 
+of extremism and polarization---specifically ``affective polarization'' where
+the distribution of opinions in society come to be increasingly 
+bifurcated~\cite{Bramson2016,Iyengar2019}. 
+It lays some groundwork for predicting 
 rising extremism and polarization. Explaining and predicting 
 extremism and polarization is a problem studied by researchers across disciplines
-and subdisciplines, with many nuanced approaches. In this section I 
-introduce a selection of related, relevant work on this problem.
+and subdisciplines, with many nuanced approaches. Understanding
+polarization, even or especially among scientists~\cite{OConnor2018}, 
+is critical as the world population
+grows and our polarized responses to hazards 
+including global warming~\cite{Cook2016} and pandemics~\cite{Green2020} 
+put the world at risk. 
+In this section I introduce a selection of related, relevant work on the 
+problem of explaining and predicting extremism and polarization.
 
-To explain rising extremism and polarization
+The primary motivation and basic data on polarization are long-term 
 
 
+There are several approaches to explaining rising extremism and polarization.
+Empirical studies investigate various factors and communication media to understand
+how polarization is affected by, e.g., social media use and 
+sentiment~\cite{Bail2018}, mass media effects~\cite{Prior2013,Pew2014,Martin2017a}, 
+or pragmatic communicative 
+strategies~\cite{Charteris-Black2009,Thibodeau2015,Flusberg2017,Flusberg2018,Turner2021a}.
+
+
+Computational and formal modeling complements, evaluates, and motivates, evaluates 
+empirical work investigating the emergence of extremism and polarization.
+Formal computational models allow us to prove out mechanistically what might
+be assumed or claimed verbally. Computational models test the logic of 
+verbal models. In this dissertation I will claim that a few simple empirically
+motivated assumptions about individual-level psychology and behavior result
+in the emergent group- and society-level phenomena of rising extremism and
+polarization. It is one thing to develop this claim verbally. When
+Observing that a set of \emph{how possibly} assumptions foster extremism and
+polarization in a society of computational simulated agents 
+(think of them as ``sims''), this strengthens the claim of causality. While
+agent-based models of social influence are powerful tools in proving out 
+theories of emergent social phenomena, such model results rarely match any
+specific observations, exactly. Improving modeling efforts so they can predict
+data exactly is a subject of ongoing work (REF).
+
+Polarization is not just a problem in the United States, but indeed countries
+around the world are feeling stretched by widening gaps in . For example,
+X in Venezuela Y~\cite{Morales2015}. In Ukraine, \citeA{Romenskyy2018} found , 
+which they showed resulted
+in Z based on a bounded confidence computational social influence model. 
+In Egypt, \cite{Borge-Holthoefer2014}.
+
+
+\subsection{A simple visual model of societal extremism and polarization}
+
+Polarization refers to a particular distribution of opinions in a 
+society~\cite{Blau1974,Bramson2016,Turner2018}. Opinion polarization is maximum when
+a society holds one extreme opinion or the other, with each group having half
+the society's population. At the same time, we 
+
+First, let us consider how social structure can be represented as
+the distribution of people's opinions in a geometric space~\cite{Blau1974}.
+
+In representing  means we use mathematical graph theory to represent 
+individuals as graph ``nodes''; relationships between individuals
+are represented by edges~\cite{Friedkin1998,Barabasi2016}. 
+Edges may be uni-directional or bi-directional.
+
+
+(FIGURE HERE OF CONNECTED CAVEMAN AND ONE HISTOGRAM OF RESPONSES TO LIKERT SCALE)
 
 \subsection{How real is polarization, and who is becoming polarized?}
 
@@ -157,7 +250,6 @@ extreme ideological commitments arise among a minority of the population,
 with a majority independently aligned either out of an honest belief in 
 evaluating individuals and not parties, or who are casual political
 observers who begin to pay attention only around election time~\cite{Kinder2017}.
-
 
 \section{Language and communication in polarization}
 
