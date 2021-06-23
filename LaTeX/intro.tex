@@ -236,6 +236,21 @@ which they showed resulted
 in Z based on a bounded confidence computational social influence model. 
 In Egypt, \cite{Borge-Holthoefer2014}.
 
+Polarization, understood as the variance in opinions or attitudes among
+individuals in a population, increases whenever one group in society 
+becomes more extremely opposed to the other group(s). Therefore, understanding
+the factors that lead to extremism are important to understand, since these
+contribute to polarization. Behavioral studies have found that when groups share a valence of
+opinion to some degree (e.g., they all ``agree'' more or less with some
+statement) they tend to become more extreme in the direction they were already
+leaning---social psychologists have named this \emph{group polarization}.
+However, in Study 3 here I actually shows that many of the detections of 
+increased extremism in these studies are plausibly false detections, but that
+does not necessarily mean the phenomenon does not occur. Study 2 will show
+that group polarization could be caused by the simple cognitive fact that
+those with more extreme opinions are more stubborn, i.e., less susceptible
+to social influence.
+
 
 \subsection{A simple visual model of societal extremism and polarization}
 
@@ -481,14 +496,20 @@ more beneficial~\cite{Zollman2007,OConnor2019e}.
     Important/relevant social factors
     \begin{itemize}
       \item 
-        Unless we know someone or are in close proximity to someone, it is
+        Unless we know someone or are in close physical or virtual proximity to someone, it is
         unlikely we will interact with them. Thus, unlike molecules in an
         ideal gas, we cannot in general assume that people in society are
         ``well mixed'', i.e., we cannot assume 
         that every person will interact with everyone else within some 
-        relevant timeframe.
+        relevant timeframe. In fact understanding
+        the spread of pandemcis or predicting the resilience of
+        a power grid under attack, and other important cases,
+        cannot be understood unless the relationships
+        between individuals are modeled as structured, as opposed to unstructured
+        or random.
       \item
-        People tend to choose social interaction partners who 
+        In social systems there are several ways people are influenced by one
+        another. People tend to choose social interaction partners who 
         are similar to themselves, known as \emph{homophily}. As homophily
         increases among a population, this
         increases the chance that individuals interact with similar others, 
@@ -525,6 +546,16 @@ more beneficial~\cite{Zollman2007,OConnor2019e}.
             Temporal networks
         \end{itemize}
     \end{itemize}
+
+  \item
+    Abstracting social interaction structure in terms of a social network enables
+    us to use mathematics and computational modeling to understand and predict subtle 
+    differences between different interaction structures and emergent social
+    phenomena such as extremism and polarization, infection rates, and 
+
+  \item
+
+
     
 \end{itemize}
 
@@ -616,7 +647,7 @@ relationship~\cite{Abney2014,Ramirez-Aristizabal2018,Schloesser2019,Schneider202
 The first emergent phenomenon we consider is the frequency of usage across
 cable TV news outlets, which we assume varies depending on how soon there will
 be or how recently there has been a presidential debate or the presidential 
-election. Using counts of metaphor use as an emergent variable 
+election. Using counts of metaphor use as an observed variable 
 is not a standard one like rising polarization. However, it does 
 complement similar emerging approaches to studying time series of semantic content in
 mass media and social media in order to understand how cognitive, cultural, and
@@ -649,39 +680,101 @@ sociologists~\cite{Friedkin1999a}, political scientists~\cite{Schkade2010}, and 
 
 \section{Model-based theoretical approach}
 
-So far I have appealed to a number of models of how collective social 
-behavior and opinions emerge from repeated one-off, 
-dyad-level instances of interpersonal social influence. But just what is
-a model of social influence and structural emergence, 
-and (why) are they useful for explaining and predicting the
-emergence of social structure? 
+One cornerstone of this dissertation is the use of formal, computational models
+for explaining and predicting emergent social phenomena. We have outlined
+some basic cognitive, communicative, and social factors that, together,
+form the substrate from which emergent social phenomena arise, such as rising extremism
+and polarization. But some questions remain that will be useful
+to address before presenting the dissertation studies, since all four
+studies use this model-based approach. I will try to explain 
+just what mechanistic models are and how they are necessary for a robust
+explanation of any object of scientific study, not just emergent social
+phenomena. 
 
-In general, explanations of collective behavior are valuable because they force
-scientists to articulate the traits, features, and capacities of indivdiuals,
-and how individuals relate to one another~\cite{Kauffman1970,Wimsatt2013}.
-Studies lacking detailed models tend to be motivated by theories based on
-a series of correlations found in previous studies. Unfortunately, basing
-psychological and social theory on correlations alone are highly subject
-to inferential problems due to the invalidity or incompatibility of 
-underlying assumptions used to obtain significant null-hypothesis testing
-results (which correlational studies usually are)~\cite{Meehl1990}.
+Insert abridged and expanded version of Mech Modeling for the Masses
+here, possibly in a few paragraphs, or maybe just summarize in one.
 
-Explain how models are used throughout
-\begin{enumerate}
-  \item 
-    Dynamical impulse model of violent metaphor use 
-    increase near debates and elections
-  \item
-    Social influence model (could get into other such models, e.g., bounded confidence)
-  \item
-    Generative statistical model of false group polarization detections.
-    Formalizing the unformalizable.
-\end{enumerate}
+This dissertation uses two major modeling 
+approaches: statistical modeling and agent-based modeling. Statistical
+models are often fit to data, but they need not be. To show that
+many group polarization results are false, I used a statistical model
+to generate counterexamples demonstrating that many published results are
+plausibly false. These statistical models are mechanical in that they measure
+the dynamics of violence metaphor use under the influence of presidential
+debates in one case, and in the other case the statistical model encapsulates
+the measurement-deliberation-measurement process in group polarization studies. 
+The other modeling approach is the use of agent-based
+models. Agent-based models are a way to directly specify the mechanisms
+identified in a mechanistic model. Agents are simulated individuals whose
+capacities within the model determine how it updates its own opinion based on
+the opinions of interaction partners. Interaction structure in these models,
+Who interacts with whom is encoded in and structured by a social network, that
+is also a model component.
+
+Study 1 and Study 3 both use statistical models---in Study 1 the model is fit
+to observations, and in Study 3 the model generates simulated counterfactual
+data. In Study 1, to partially explain the dynamics of metaphorical violence use on cable TV news,
+I developed a dynamical model expressed in terms of a statistical regression
+model where each news channel is in either a normal state or a 
+transient excited or depressed state. I used the Akaike Information 
+Criterion to identify the statistical model
+that best partitions daily timestamps that most likely belong in either the
+normal or excited/depressed state~\cite{Burnham2004,Burnham2011}. 
+In Study 3, we use a generative 
+statistical model to simulate experimental group polarization data where
+pre- and post-deliberation opinions are drawn from distributions with the
+same mean. By also simulating the measurement of these opinions, I show
+that ceiling effects lead to a false detection of an opinion shift due to
+the process of consensus that reduces group opinion variance from
+pre- to post-deliberation.
+
+Study 2 and Study 4 model different systems using the same underlying
+agent-based social influence model that incorporates the cognitive and social 
+factors outlined in Section~\ref{sec:cognitiveSocialFactors} above. Agent-based
+models start by defining a computational representation of a person, called
+an \emph{agent}. I wrote computer code that created a world in which agents
+were created, made to interact with other agents according to rules and
+assumptions based on the cognitive and social factors outlined above, and, 
+after thousands or millions of rounds of social interaction, we can measure
+the distribution of opinions to calculate either a rise in extremism or
+increased polarization.
+     
+
 
 \section{Overview}
 
+Now we have reviewed the overarching problem and goals of this work, the
+theoretical foundation we draw on to address specific subproblems, and
+the analytical approach I take to studying different emergent social
+phenomena, I will now give an overview of the four Studies presented in this
+dissertation.
+
+The four Studies examine three specific subsystems in the greater social system
+of elite and interpersonal communication. First, Study 1 studies and 
+calculates the influence of political events, namely three US presidential
+debates and the presidential election, on metaphorical violence use across
+three cable TV news channels in 2012 and 2016. Study 2 focuses down from
+mass communications to group-level social influence and shifts in extremism.
+In that study I use agent-based modeling to show that groups may become 
+more extreme when they are dragged to extreme opinions by stubborn extremists.
+However, in the course of Study 2 I found that many behavioral studies of
+group polarization used a problematic method for measuring group polarization.
+Study 3 uses a generative statistical model to show that, indeed, over 90\% of published detections of group polarization
+are plausibly false detections. Finally, in Study 4, I explore how well the
+model from Study 2 could be used to explain and predict society-level
+polarization. I found that long-term polarization increases with the initial
+polarization; that realistic small-world networks result in higher levels of
+polarization than common alternative configurations; that polarization
+increases with miscommunication probability; and that
+polarization is highly stochastic---the same initial configurations and
+parameter settings can result in a range of predictions from low to high
+levels of polarization solely due to the path dependence of interpersonal
+interactions over many time steps.
+
 
 \subsection{Study 1: Violence metaphors foster extremism and polarization}
+
+(FOUR IMRAD PARAGRAPHS PER STUDY)
 
 \subsection{Study 2: Stubborn extremism explanation of group polarization}
 
