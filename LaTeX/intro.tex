@@ -126,33 +126,24 @@ Compiled \today
   \item
     To answer these research questions, this dissertation focuses on the communicative, cognitive,
     and social factors that provide the human substrate for rising extremism
-    and polarization. (INTRO THE STUDIES' SCOPES IN ONE PARAGRAPH---1-2 SENTENCES ON
-    ALTERNATIVE APPROACHES, E.G., \cite{Zmigrod2018}, \cite{Mason2018}, \cite{Iyengar2019},
-    \cite{Wood2017}, \cite{Dixit2007}, \cite{Jern2014,OConnor2018})
+    and polarization. 
+
+  \begin{itemize}
+    \item
+      INTRO METAPHOR AND COMMUNICATION FACTORS
+
+    \item
+      INTRO COGNITIVE FACTORS
+
+    \item
+      INTRO SOCIAL FACTORS
+  \end{itemize}
 
   \item
-    INTRO METAPHOR AND COMMUNICATION FACTORS
+    STUDY SUMMARIES
 
   \item
-    INTRO COGNITIVE FACTORS
-
-  \item
-    INTRO SOCIAL FACTORS
-
-  \item
-    STUDY 1 SUMMARY
-
-  \item
-    STUDY 2 SUMMARY
-
-  \item
-    STUDY 3 SUMMARY
-
-  \item
-    STUDY 4 SUMMARY
-
-  \item
-    PLAN FOR THE PAPER
+    PLAN FOR THE INTRO CHAPTER AND DISSERTATION
 
 \end{itemize}
 
@@ -587,7 +578,7 @@ In our application to understanding social influence and , we might see
 social networks change when, for example, social ties are abandoned when interpersonal
 similarity drops below some threshold~\cite{Axelrod1997,Hegselmann2002,Centola2007,Kossinets2009}.
 
-Whabout these? \cite{Watts1999,Macy2003,Baldassarri2007, Flache2011,DellaPosta2015,Turner2018,Stewart2020b}
+% Whabout these? \cite{Watts1999,Macy2003,Baldassarri2007, Flache2011,DellaPosta2015,Turner2018,Stewart2020b}
 
 \section{Mechanistic models of emergent social phenomena}
 
@@ -799,7 +790,7 @@ pre- to post-deliberation.
 
 Study 2 and Study 4 model different systems using the same underlying
 agent-based social influence model that incorporates the cognitive and social 
-factors outlined in Section~\ref{sec:cognitiveSocialFactors} above. Agent-based
+factors outlined above. Agent-based
 models start by defining a computational representation of a person, called
 an \emph{agent}. I wrote computer code that created a world in which agents
 were created, made to interact with other agents according to rules and
@@ -817,39 +808,66 @@ the analytical approach I take to studying different emergent social
 phenomena, I will now give an overview of the four Studies presented in this
 dissertation.
 
-The four Studies examine three specific subsystems in the greater social system
-of elite and interpersonal communication. First, Study 1 studies and 
-calculates the influence of political events, namely three US presidential
-debates and the presidential election, on metaphorical violence use across
-three cable TV news channels in 2012 and 2016. Study 2 focuses down from
+First, Study 1  
+calculates the influence of political events on metaphorical violence use across
+three cable TV news channels in 2012 and 2016. I found that significant changes
+in metaphorical violence usage occur across cable news outlets MSNBC, CNN, and
+Fox News in both 2012 and 2016 around the time of the presidential debates. 
+In 2012, changes were significant, but rather small and there was no discernable
+pattern across news outlets. In 2016, however, metaphor use increased dramatically
+across networks in the run-up to the 2016 elections.  
+I hypothesized that Twitter usage was an important driver of this difference due to 
+a close reading of cable news violence metaphors that seemed to cast candidate
+tweets as metaphorical violence. This was indeed the case, as revealed through a
+correlational analysis between Twitter activity by 2012 and 2016 Republican
+and Democratic candidates and violence metaphor usage on cable news. Correlations
+in 2016 were more significant overall than in 2012. Candidate Twitter use
+accounted for over 30\% of variance in violence metaphor use in 2016, compared to
+about 8\% of variance in 2012. By understanding the
+dynamics of violence metaphors on cable news, we can better understand and 
+predict downstream effects of violence metaphor use, including reduced capacity
+for rational thinking due to emotional overwhelm~\cite{Suhay2018} and heightened
+risks of political violence~\cite{Kalmoe2014,Kalmoe2018}.
+
+Study 2 focuses down from
 mass communications to group-level social influence and shifts in extremism.
-In that study I use agent-based modeling to show that groups may become 
-more extreme when they are dragged to extreme opinions by stubborn extremists.
-However, in the course of Study 2 I found that many behavioral studies of
+In that study I use agent-based modeling to show that group polarization 
+may be driven by the cognitive factor of ``stubborn extremism'', where
+extremists are less susceptible to social influence~\cite{Reiss2019,Zmigrod2019a}.
+Group polarization is the phenomenon where socially isolated groups who were
+already biased on average in their opinions become more extreme in the direction
+of their original bias. To detect group polarization, researchers survey participant
+opinions, form groups that are biased in one direction or another, and then
+re-survey participants. If the mean of the group opinions changes, then
+a group polarization opinion shift is said to occur. Existing explanations of
+group polarization focus on more complex explanations that require potentially
+problematic axuiliary assumptions that seem to lack robust empirical support.
+Existing explanations also fail to explicitly account for the observation that
+the magnitude of opinion shifts are positively correlated with initial group
+extremism. However, in Study 2 I show that the stubborn extremism explanation
+also predicts this correlation between initial extremity and opinion shift.
+The stubborn extremism explanation seems more parsimonious in that
+it makes a single, simple, empirically valid assumption that is more explanatory
+than any alternatives.
+
+In the course of Study 2 I found that many behavioral studies of
 group polarization used a problematic method for measuring group polarization.
-Study 3 uses a generative statistical model to show that, indeed, over 90\% of published detections of group polarization
-are plausibly false detections. Finally, in Study 4, I explore how well the
+Specifically, many group polarization studies used metric statistical models
+on ordinal data. This can lead to false detections of changes in opinion
+Study 3 uses a generative statistical model to show that, indeed, over 90\% of 
+published detections of group polarization are plausibly false detections. 
+
+Finally, in Study 4, I explore how well the
 model from Study 2 could be used to explain and predict society-level
-polarization. I found that long-term polarization increases with the initial
-polarization; that realistic small-world networks result in higher levels of
-polarization than common alternative configurations; that polarization
-increases with miscommunication probability; and that
-polarization is highly stochastic---the same initial configurations and
+polarization, as opposed to increased extremism in small groups in Study 2.
+I found that (1) long-term polarization increases with the initial
+polarization; (2) that realistic small-world networks result in higher levels of
+polarization than common alternative configurations; (3) that polarization
+increases with miscommunication probability; and (4) that
+polarization is highly stochastic, i.e., the same initial configurations and
 parameter settings can result in a range of predictions from low to high
 levels of polarization solely due to the path dependence of interpersonal
 interactions over many time steps.
-
-
-\subsection{Study 1: Violence metaphors foster extremism and polarization}
-
-(FOUR IMRAD PARAGRAPHS PER STUDY)
-
-\subsection{Study 2: Stubborn extremism explanation of group polarization}
-
-\subsection{Study 3: Many observations group polarization are plausibly false positives}
-
-\subsection{Study 4: Opportunities and limits for predicting polarization}
-
 
 
 \bibliographystyle{apacite}
