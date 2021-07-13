@@ -1,0 +1,1195 @@
+
+  ``Group polarization'' is said to occur when socially isolated groups become more
+  extreme following deliberation on some topic. This has clear implications for
+  politics and other social organizations since extremism tears at the fabric
+  of society. The goal of the current paper is to raise an alarm that
+  many published results may plausibly be false detections of group polarization.
+  These false detections are 
+  caused by failing to account for how opinions are represented psychologically
+  and measured in the physical world. Group polarization studies implicitly assume latent psychological opinions are continuous
+  when they use \emph{t}-tests to detect group polarization, as many or most do.
+  We demonstrate that if we assume 
+  participant opinions are drawn from a continous distribution but reported
+  on an ordinal scale, then common group polarization experiments could be
+  reporting group polarization when groups really just converged to the 
+  pre-deliberation average. This may be masking interesting differences 
+  in social dynamics when the group is more moderate versus more extreme.
+  Our analysis revealed other problems including
+  a lack of specificity in process models of group polarization and a failure
+  to account for important sources of variance (e.g., group membership 
+  and survey item) in statistical models. To ensure reliable group polarization
+  results, appropriate statistical designs must be adopted.
+
+\newpage
+
+\begin{quote}
+In our introductory social psychology course, 
+we have for many years used the [group polarization experimental paradigm] as
+a laboratory exercise. The exercise works beautifully, but one must be
+careful to forewarn a class that [group polarization] does not occur with every 
+group\ldots and that the effect is not large. 
+\par\raggedleft\cite[p. 205]{Brown1986}
+\end{quote}
+
+\begin{quote}
+One of the most robust findings in social psychology is that of attitude polarization 
+following discussion with like-minded others.
+\par\raggedleft\cite[p. 267]{Cooper2001}
+\end{quote}
+
+
+\section{Introduction}
+\label{sec:intro}
+
+Social and political extremism and polarization threaten democratic 
+institutions worldwide. If we could explain how and predict when extremism
+emerges, we could brace for its ill effects and perhaps devise interventions
+to counter it. To explain how extremism emerges, we need to focus on specific
+instances where extremism does emerge, since social systems are complex systems.
+Social psychologists, sociologists, political scientists, and legal
+scholars for decades have tried to explain ``group polarization'', 
+the name given to the specific phenomenon where small, 
+socially isolated groups tend become even more extreme in their opinions if their
+initial opinions centered around some non-neutral mean opinion.  Several 
+theories explaining group polarization have emerged, supported by extensive
+empirical evidence demonstrating that these groups reliably shift their opinions
+to become more extreme after group 
+deliberation~\cite{Brown1986,Brown2000,Schkade2010,Sieber2019}. The scientific consensus seems
+to be that different theories are potentially valid since there exists 
+supporting evidence for all~\cite{Brown2000}. However, we show in this paper
+that the evidence for group polarization is weak at best, meaning that these
+theories may be explaining a non-effect.
+
+We demonstrate in this paper that a potentially 
+large fraction of these group polarization detections are
+plausibly false. This means that the decades of theorizing about 
+group polarization may be for naught as there is no value explaining something
+that does not really exist.. 
+This is highly concerning given that the regularity of detecting
+group polarization makes the phenomenon a celebrated social 
+psychological result~\cite{Brown1986,Brown2000} that has essentially never
+been seriously questioned as a real effect. One prominent author has even elevated it
+to a scientific ``law''~\cite{Sunstein2002}. Litte work has been done
+on group polarization in the past two decades, apparently because researchers 
+thought it was real and explained well enough.  
+Understanding group polarization, if it really exists, has broad impacts for 
+society at large. We must have a solid empirical foundation to trust theoretical 
+explanations of group polarization---our study suggests that foundation is
+cracked at best.  
+% Our work uncovered other potential issues with group polarization 
+% studies, including a lack of theoretical specificity and 
+% overgeneralization~\cite{Gervais2021,Yarkoni2021}. 
+Mechanistic modeling and appropriate Bayesian statistics can be used
+to elminate the problems we identify and explain here~\cite{Kruschke2018,Kruschke2018a,Turner2021}.
+
+Many group polarization studies' findings are plausibly false due to their
+use of metric models (e.g. $t-$tests) to detect group opinion shifts measured with ordinal valued
+survey instruments. False detections plausibly occur due to the simpler process of consensus where
+shifts in more extreme values are masked by ceiling effects, but shifts
+from less extreme to more extreme opinions are detected~\cite{Liddell2018}. 
+It is a common observation among group polarization researchers
+that consensus occurs just as would be expected, i.e., the pre-deliberation
+variance in opinions is greater than the post-deliberation variance~\cite{Asch1951,Asch1955,French1956,DeGroot1974}.
+What makes group polarization special is that the consensus (mean) opinion
+has increased in extremity compared to the pre-deliberation opinion.
+However, using an ordinal scale introduces ceiling/floor effects so that 
+those in, say, the 80th percentile and the 99.99th percentile opinions
+report the same opinion, or worse. When simple consensus occurs we 
+expect the less extreme opinions tend to become more extreme and the more extreme opinions tend to
+be less extreme.  If simple consensus occurs, but only the less extreme opinions' shifts are detected, 
+then the average will apparently increase. If 
+participants' internal, ``latent'' psychological opinions are measured either
+directly on a continuous scale (a minority of group polarization studies do) 
+or indirectly somehow, then perhaps such problems could be avoided. 
+
+We are not the
+first to point out serious problems in the group polarization paradigm---\citeA{Cartwright1973} 
+was concerned about poor theory and methods in group polarization from the start
+when researchers believed the phenomenon only occurred in situations of
+risk determination, and claimed their research should be used for studying
+how critical decisions about, e.g., nuclear deterrence should be made. We
+hope our work here further pushes group polarization researchers, and
+social psychologists and others who measure opinion change, to develop sound
+theories supported by valid statistical inferences.
+
+To understand the technical and theoretical importance of this work, it is
+necessary to first explain how group polarization experiments work.
+Below we review 
+common methods of inducing and detecting group polarization among groups 
+of participants and how individual opinions and group polarization opinion shifts 
+are typically measured.  
+After introducing group polarization methods, 
+we will explain in detail how these
+methods plausibly lead to false group polarization detections.
+Then we develop our
+formal, generative statistical model that simulates false group polarization
+detections. We then present our results
+showing that over 90\% of published detections of group polarization
+opinion shifts are plausibly false. We close with a discussion of whether
+group polarization is real and how to improve group polarization research going 
+forward.
+
+
+\section{Group polarization theory, methods, and results}
+
+Initially, the group polarization effect was thought only to apply to opinions about how much
+risk would be appropriate to take given some life 
+decision~\cite{Wallach1965,Teger1967,Stoner1968}. \citeA{Moscovici1969} then
+showed that deliberation about political opinions also led to group 
+polarization. At this point, motivated by \citeA{Cartwright1971} and
+\citeA{Cartwright1973},
+new explanatory mechanisms were proposed. The two explanations that survived to today 
+are the social comparisons theory~\cite{Brown1974,Sanders1977,Myers1978} 
+and persuasive arguments theory~\cite{Burnstein1973,Vinokur1974,Burnstein1975,Vinokur1978}. 
+Around the time of Isenberg's
+(1986) review, a self-categorization explanation~\cite{Turner1987} of
+group polarization was developed and supposedly 
+supported empirically~\cite{Turner1989,Abrams1990,Hogg1990,McGarty1992,Krizan2007}. 
+There is also a
+``social decisions scheme'' theory that identifies social power structures
+as a dominant factor in the emergence of group polarization~\cite{Zuber1992,Friedkin1999a}. 
+More recently, focus on the correlation between stubbornness and extremism has emerged as
+a simple, empirically-motivated explanation of group 
+polarization~\cite{Baldassarri2007,Mueller2018,Banisch2019,Turner2020}.
+The results we present here, while damning for many group polarization studies,
+will enable real progress to be made untangling this theoretical boondoggle.
+
+\subsection{Common experimental design elements}
+
+Group polarization studies tend to follow the same general experimental paradigm,
+with slight variations to test particular theoretical explanations or 
+real world situations. Participants first answer questionnaire
+items or otherwise give their opinions or positions on some topic. Small groups
+typically of 2-6 participants are formed such that the mean opinion or position
+of group members is baised towards one or the other extreme of 
+the measurement scale. Group formation is often based on initial participant
+answers to the questionnaire. Sometimes researchers use a different, but similar, 
+questionnaire to make like-minded groups. For example, \citeA{Myers1970} 
+examined group polarization in the context of racial attitudes. To create groups
+with different levels of mean tolerance or racism, Myers and Bishop used a
+survey instrument to assess racial attitudes generally. Then they used a different
+questionnaire on racial policy opinions for deliberation topics, where pre- and post-deliberation 
+survey responses were used not to pick groups, but to measure group polarization.
+In a different approach altogether, \citeA{Schkade2010} relied on a correlation between 
+geographic location and political opinions to create novel groups that were
+reliably biased towards liberal or conservative bias. 
+
+In the most common paradigm participants first answer one or
+several questionnaire items to determine their initial opinions on some 
+deliberation topic. One widely used questionnaire is the choice dilemma
+questionnaire first used by~\citeA{Stoner1961} to induce group polarization.
+The questionnaire prompts participants for their opinions on how much risk would be 
+acceptable for certain life decisions, such as whether or not to pursue
+riskier research projects with higher payoffs compared to lower risk projects
+with lower payoffs. Political questionnaires are also common. For example,
+\citeA{Moscovici1969} asked Parisian lycée students about their 
+opinions of then-president
+Charles de Gaulle and of American foreign policy; \citeA{Myers1970} asked about
+racial attitudes; \citeA{Schkade2010} asked about affirmative action, 
+same-sex civil unions, and global warming. 
+
+Most studies using questionnaires
+prompt participants to give their responses on an ordinal, Likert-type scale.
+Stoner's (1961; 1968) choice dilemma questionnaire was a 10-point ordinal
+scale, with 1 representing the most risk acceptance and 10 representing the
+least risk acceptance.  More generally common Likert scales typically 
+have participants rate (un)favorability of some entity
+in the world or degree of (dis)agreement with some statement of opinion or
+belief. For example, when French students answered ``American economic aid
+is always used for political pressure'', they marked a whole number on
+a seven-point scale from
+-3 (strongly disagree) to +3 (strongly agree), with zero representing 
+neutral or no opinion. These scales do not always include 0 as the neutral
+point. \citeA{Schkade2010} used a ten-point scale from 1 (disagree very strongly)
+to 10 (agree very strongly).
+
+Non-questionnaire group polarization studies have used a variety of 
+methods. In one approach, researchers simulate jury deliberations
+for an experimental design where participants give either opinions
+on whether a defendant is guilty or how much money for damages should be
+awarded~\cite{Kaplan1977,Kaplan1977a,Schkade2000,Schkade2007,Sunstein2000}\footnote{
+Schkade, et al., (2000), entitled ``Deliberating about Dollars: The Severity Shift'',
+was funded by Exxon Company, U.S.A., who have a clear interest in understanding
+what causes individuals to raise or lower the amount of damages they believe
+a responsible party should pay.}. Another approach studied group
+polarization in the context of gambling behavior in the game of 
+blackjack~\cite{Blascovich1974,Blascovich1975,Blascovich1976}, which
+found that participants demonstrated opinion shifts to be more risky merely
+when exposed to other group members' bets. Another odd example of questionable
+\emph{prima facie} validity is an
+experimental design that used an ``autokinetic situation'' where participants
+watched a flashlight move in a darkened room, then deliberated about how
+far the light moved after being told that longer measurements were more socially
+desirable~\cite{Baron1976}. Our model does not apply to these studies, but there
+are many more studies that use ordinal scales. Furthermore, other problems
+such as not accounting for the multilevel structure of the data may 
+subvert the validity of these studies.
+
+
+\subsection{Common statistical procedures and implicit assumptions}
+
+All group polarization studies we reviewed that used an ordinal opinion
+measurement scale also used a $t$-test (or similar) to detect group polarization opinion
+shifts. Statistical tests like $t$-tests are used to determine the probability
+that two datasets were drawn or generated from the same distribution. These
+tests assume that individual opinions are continuous
+and normally distributed. To determine whether two datasets came from the
+same distribution, a normal distribution is fit to each dataset. Then, the
+probability that the two datasets were drawn from the same distribution
+is proportional to the degree of overlap between the fitted distributions.
+In the studies we reviewed, pre- and post-deliberation
+distributions are always pooled over groups, and often by 
+pooling over several items within one topic. For example, \citeA{Moscovici1969}
+pool over 11 items in the topic about Charles de Gaulle and 12 items in the
+topic and deliberation about American policy. 
+\citeA{Schkade2010} provide a counterexample to this, where there is only
+one item per topic. 
+
+When $t$-tests are used to detect group polarization with ordinal observations, 
+they are susceptible to false positives due to ignoring the effects of the
+measurement process~\cite{Liddell2018}. 
+The problem is that no matter how extreme a participant's
+latent opinion is, it will be reported as the maximal ordinal value. This
+means that an opinion in the 99th percentile of extremity may be mapped to the
+same value as an opinion in the 80th extremity percentile. This means that if,
+for example, an extremist shifted their opinion towards moderation, the 
+measurement scheme could not detect this---it would appear as if the opinion
+did not change at all. 
+
+% Consider qualitatively what happens when a participant gives their opinion
+% on an ordinal scale. If participants' opinions are continuous and there
+% is perfect fidelity between the ability of a participant to convert their 
+% opinion to a numerical value, then participants will convert their continuous
+% opinion to the ordinal opinion bin value closest to their opinion. 
+% For example,
+% consider the 10-point choice dilemma questionnaire response scale 
+% that runs from 1 to 10. If a participant's latent opinion is 9.2 they will
+% report an ordinal opinion of 9. If their latent opinion is 9.6, 10.2, or 100,
+% their reported ordinal opinion will be 10.
+
+
+
+% \subsection{Theoretical explanations of group polarization}
+
+% Below we review the four explanations or theories of group polarization 
+% assumed or evaluated by the case studies we investigated for false detections. 
+% We also review select empirical support for each explanation.
+% The explanation of group polarization as due to the stubbornness of 
+% extremists comes from empirically motivated modeling 
+% projects that have yet to be verified empirically in group polarization settings.
+% Therefore, we do not review that here. Future work will use the results of
+% the present paper to devise more appropriate measurement and statistical 
+% procedures that will help ensure the validity of future empirical studies.
+
+% Following our theoretical review, we identify and explain common experimental design
+% elements and statistical methods used commonly across group polarization research
+% independent of theoretical aims and assumptions. Then in this section
+% we review findings from these decades of research, which overwhemingly support 
+% group polarization in general---each theory can boast supporting empirical
+% evidence as well. This sets up the following section where
+% we explain our model in mathematical detail that we will use to
+% show that we should be highly skeptical of the broadly supportive evidence for group polarization. 
+
+% \subsubsection{Social comparisons}
+
+% When researchers began searching for an explanation of group polarization
+% in response to Cartwright's (1971; 1973) critiques of the ``risky shift'' literature, 
+% some adapted the extant ``theory of social comparison processes''~\cite{Festinger1954} of group-level
+% social influence as an explanation. This theory assumes that when people
+% interact in group settings, each individual infers what the prevailing
+% social norms are, compares their own opinion to the social norm, and adjusts 
+% one's own opinions or behaviors so they are more socially accepted or celebrated. 
+% One testable corollary of this explanation is that no deliberation is required, \emph{per se}.
+% All that is required is ``mere exposure'' to others' 
+% opinions~\cite{Zajonc1968,Burgess1971,Bornstein1990,Montoya2017}. Several studies
+% have shown that when a group polarization experiment is run as explained above,
+% but without group deliberation, non-verbal displays of individual opinions 
+% to the group is alone sufficient social influence to foster group 
+% polarization~\cite{Teger1967,Blascovich1973,Blascovich1975,Blascovich1976,Sanders1977,Myers1978,Myers1982}.
+
+% Just because mere exposure to others' opinions tends to lead to group polarization
+% does not necessarily support all auxiliary assumptions made by the
+% social comparisons explanation~\cite{Meehl1990}. It is not clear what the
+% mechanism is by which individuals infer the group norm if it is not just the
+% average. How is it, exactly, that individuals infer this more extreme than
+% average group norm? \citeA{Festinger1954} assumes first that ``there is a 
+% universal human drive to evaluate our opinions and abilities'' \cite[p. 78]{Brown2000}.
+% But how ubiquitous is this drive to distinguish oneself through conformity?
+% Clearly individuals vary in their drive to conform to social norms in general---how
+% does this affect group polarization opinion shifts?
+% Furthermore, achieving distinctiveness through conformity may have counterintuitive
+% effects~\cite{Smaldino2015a}. Social comparisons theory fails to make contact
+% with extensive literature on norms and norm change, which should be accounted
+% for~\cite{Bicchieri2006,Bicchieri2014,Bicchieri2017}.
+
+% These are important questions to answer. Perhaps social comparisons offers a
+% good starting point for a partial explanation of group polarization, but 
+% its epistemological status is shaky. It is therefore important that we
+% understand how to properly measure opinion shifts to either support,
+% refute, or revise and incorporate the social comparisons account into a 
+% broader explanatory model of group polarization.
+
+% \subsubsection{Persuasive arguments}
+
+% Persuasive arguments theory explains that opinion change is determined by the number and persuasiveness of 
+% arguments that support different poles of the opinion scale. Arguments, then,
+% are central theoretical entities in this model alongside opinions. If there are more
+% arguments favoring one polar opinion (disagree/agree) over another~\cite{Ebbesen1974}, or if
+% arguments that exist for one polar opinion are more persuasive 
+% then the group will collectively move towards that 
+% polar opinion~\cite{Vinokur1974,Burnstein1977}. This theory assumes that for an argument to have an effect
+% on a participant, that participants must not have heard the argument 
+% before~\cite[see Equation on p. 96]{Bishop1974}. Furthermore, the validity,
+% or informativeness, is hypothesized to be the primary auxiliary factor in 
+% determining the magnitude of influence for a given argument~\cite{}. These
+% assertions are supported by statistical inference using $t$-tests (or similar)
+% in experimental manipulations designed to measure novelty and informativeness
+% by controlling for other factors. 
+% We show in our Analysis, however, that all experimental conditions in 
+% two influential persuasive arguments studies are plausibly false.
+
+% One problem with the persuasive arguments explanation is that only arguments 
+% are persuasive, not people. Perhaps, for example, there is a simple 
+% consistency in that more extreme individuals tend to be more persuasive than moderates, 
+% perhaps due to their confidence in their opinions. This assumption would actually 
+% explain observations made by \citeA{Burnstein1973} who 
+% found that insincere arguments are not influential.
+% Another related problem is underspecified
+% psycholinguistic mechanisms of social influence. Perhaps novelty and 
+% informativeness are two important factors in what makes an argument persuasive.
+% Surely, though, there are other factors.  
+
+% Note that based on these theoretical assumptions, 
+% study data must be analyzed with multilevel
+% statistical models that account for group membership 
+% (ignoring whether the assumptions are well-founded)~\cite{GelmanHillRegression,Yarkoni2021}. 
+% This is because the number of arguments is a key model factor in predicting opinion shifts,
+% but the number of arguments available in each group surely varies by group.
+% Unfortunately, $t$-tests (and similar) lack the capacity for multilevel structure.
+
+
+% \subsubsection{Self-categorization}
+
+% Self-categorization accounts for theory posits that people conform on what attitudes,
+% opinions, or beliefs to hold, by considering how best to ``contrast'' themselves
+% with members of an outgroup so as to solidify their membership with
+% an ingroup~\cite{Tajfel1971,Tajfel1979,Turner1987}. 
+% Experiments testing the self-categorization hypothesis use 
+% the minimal group paradigm approach to
+% understand differences in social influence (that leads to extremism) 
+% between in-group members versus out-group members. 
+% In one interesting counter-example to
+% the persuasive arguments theory, the basic experimental design was used, but
+% participants did not interact with a group---instead they were listened to 
+% tape recordings of arguments for or against some statement. Participants
+% were told they would either be joining the group or that they were listening
+% to members of an out-group. This changed whether opinion shifts were to a greater
+% extreme they were already bised towards (in-group) or if participant 
+% opinions tended to shift away from their initial bias (out-group). 
+% Persuasive arguments theory does not account
+% for group membership, so it could not have predicted this result. 
+% The minimal group approach continues
+% to be applied today across cognitive sciences, especially in understanding
+% the neuroscience of emotions towards novel in- and 
+% out-groups~\cite{Cikara2014,Molenberghs2014}.
+
+% To explain
+% group polarization, where there no explicit out-group, self-categorization
+% theorists proposed that people engaging in social interaction mentally
+% calculate the ``metacontrast ratio'', which is defined as a person's average
+% distance in opinion space from all out-group members divided by that person's
+% average opinion distance from all in-group members~\cite[p. 3]{McGarty1992}.
+% This requires them to infer their average distance to the imagined outgroup.
+% A person is then hypothesized to update their opinions to match the prototypical
+% opinion, which is defined as ``the pre-test mean where the mean is at the mid-point
+% of the comparative context\ldots.'' This leads to group polarization, since
+% ``(a)s in-group responses shift\ldots towards a more extreme position, 
+% then it becomes more likely that the prototype will tend to be more extreme than
+% the mean in the same direction'' (p. 4, \emph{ibid}). 
+
+% While neuroscientific studies implementing the minimal group paradigm support
+% the assumption that differential social influence depends 
+% on whether an individual interacts
+% with in-group or out-group members, it is not clear that it operates
+% as hypothesized in self-categorization explanations of group polarization. 
+% Specifically, the assumption
+% that people calculate meta-contrast ratios and hypothetical in-group
+% prototype opinions does not seem to be empirically supported. 
+% It is not clear to us how such a claim could be empirically supported. 
+% Another possible critique is that this reasoning seems to be circular: the 
+% in-group prototype begins as the pre-deliberation
+% mean, but changes once opinions begin to change. This seems to sidestep the
+% problem of how opinions change in the first place and why the average opinion
+% tends to become more extreme. Finally, it seems that perhaps ``prototype'' in
+% the self-categorization explanation is homologous in form and function to
+% a ``norm'' in social comparisons theory. Future work should explore this connection
+% in more detail to understand exactly how the two theories substantively differ.
+
+
+% \subsubsection{Social decision schemes}
+
+% Social decision schemes generally considers the social structure of groups to
+% account to determine what opinions or behaviors group members will 
+% take in the course of group interaction~\cite{Davis1973}. In the main branch
+% of social decision schemes, individual-level interaction strategies are 
+% hypothesized and specified. To understand social decision schemes, 
+% consider the following example adapted from 
+% \citeA[p. 195]{Brown2000}. Assume a group is trying to solve some problem.
+% The group may be composed of three types of people: 
+% (1) people who are able to solve the problem, (2) people
+% who can recognize a solution but not solve the problem themeselves, and
+% (3) people who cannot solve the problem or recognize a correct solution.
+% The group may adopt different decision rules, such as ``Truth wins'' 
+% (as long as one member has the solution, the group solves the problem),
+% ``Majority rule'' (a majority of group members must know or recognize the
+% solution), or ``Unanimous'' (all group members must know or recognize the solution).
+% If we know the composition of the group in terms of these three types, then
+% we can calculate the probability a group solves the problem. 
+% According to the social decision schemes
+% framework, if we observe how often a group solves a
+% problem and we know the distribution of strategies, we can infer the
+% decision rule used by the group.
+
+% In the context of group polarization, instead of recognizing solutions to
+% problems, people are assumed to adopt a strategy of ``risk wins'',
+% ``conservatism wins'', or ``majority wins'' in the context of the
+% choice dilemma questionnaire \cite{Laughlin1982,Zuber1992}. 
+% Unsurprisingly, when group polarization was found to shift towards greater
+% risk in these studies, \citeA{Laughlin1982} found that the best-fitting model
+% was the situation where 
+% \citeA{Friedkin1999} counts his network theoretic model as aligned with the
+% social decision schemes approach, especially over and above alternative 
+% explanations of social comparisons, persuasive arguments, and self-categorization.
+% Friedkin found support for his hypothesis that such power structures are
+% predictive of group polarization. 
+% Unfortunately, several of Friedkin's results are \emph{prima facie} 
+% plausibly null since several of the confidence intervals around the opinion
+% shift measurements include zero. Furthermore, we found that even when the
+% confidence intervals do not include zero, our model demonstrates Friedkin's
+% detections of group polarization are plausibly false.
+
+% One issue with the social decision schemes approach seems to be that the
+% emergence of distribution of strategies, and the strategies themselves, is
+% not accounted for. How does such a norm as ``risk wins'' emerge? How is this
+% not a ``norm'' or ``prototype'' as could be found in either the social comparisons
+% or self-categorization explanations, respectively? 
+
+
+% % \subsection{Review}
+
+% % We now have reviewed the outstanding theoretical questions in group polarization
+% % studies, how ordinal measurements of opinions work, how group polarization
+% % opinion shifts are commonly measured and the implicit assumptions that 
+% % imposes, and the empirical support for the four extant theoretical explanations
+% % of group polarization. 
+% % It is rare indeed that supposedly significant results are not found 
+% % when expected in group polarization experiments. When there are surprising results
+% % these are waved away like a pesky fly. For example, on noticing that
+% % there was a significant shift for a Choice Dilemma Questionnaire item when
+% % none was expected, \citeA{Burnstein1973} called their finding ``curious''
+% % and that it defied ``straightforward explanation'', as if that is something
+% % we should expect when doing science. They decided to ``merely note'' the
+% % ``occurrence and (did) not venture to speculate as to (the) cause''.
+
+% % \citeA{Isenberg1986} found through a meta-analysis that effect sizes are
+% % significantly higher for persuasive arguments accounts of group polarization,
+% % as compared with social comparisons theory. Given the practical and 
+% % theoretical problems we have identified, 
+% % No such meta-analysis has been done to compare the predictions. But, given our analysis that follows,
+% % there would be no point because several of these studies present mostly 
+% % plausibly false detections of group polarization opinion shifts.
+
+
+
+% % \section{Metric models of ordinal data lead to false detections 
+% % (and general confusion)}
+
+
+
+\section{Model}
+
+Our primary goal in this paper is to evaluate whether published positive
+detections of group polarization are reliably true, or, equivalently, plausibly false. 
+We do this by first developing a generative model of group polarization 
+experiments that simulates how opinions are reported and change, and
+how standard analytical techniques can generate the appearance of group
+polarization where none exists.
+Our model is based on the assumptions that (1) a 
+participant's internal ``latent'' opinion on some topic can be represented as a real number
+varying continuously; (2) when a participant reports their 
+opinion on an ordinal scale, the formulation
+of their latent opinion can be represented as a draw from a latent opinion distribution; 
+and (3) participants faithfully convert their continuous latent
+opinion into whatever ordinal ratings scale (e.g.\ a Likert scale) 
+the experimenters present them with. 
+Note that these assumptions assume there are there are two forms of opinions. 
+There are \emph{latent} opinions that are somehow represented and formulated in a 
+person's mind, but never directly observed. Then there are \emph{observed}
+opinions that participants report on an ordinal scale. We also then have two
+distributions of opinions that do not in general have the same summary statistics (mean
+and variance).
+
+We make these assumptions for the sake of consistency with 
+the implicit assumptions made in psychological and social science studies of
+opinions. When someone gives their opinion
+on some topic it is the result of a complex psychological process that is
+sensitive to personal beliefs and experiences, and cultural and contextual factors.
+Because of this complexity, opinions may not in fact be readily mapped onto a 
+unidirectional scale, continuous or ordinal. For our purposes we can ignore
+this possibility because our goal is to show that, under common assumptions 
+of group polarization studies, many detections of group polarization 
+may plausibly be false detections.
+
+Because simple conformity to the mean can be masked by ordinal measurements,
+a change in pre- and post-deliberation opinion variance can masquerade as 
+group polarization, i.e., a change in \emph{mean} from pre- to post-deliberation.
+Theoretically, we expect variance to decrease from pre- to post-deliberation
+as participants feel pressure to 
+conform~\cite{Asch1951,Asch1955,French1956,DeGroot1974,Lorenz2009}. 
+Conformity has been observed across group polarizaiton studies, with
+many containing explicit instructions to find consensus with group
+members as part of the experimental design.
+
+
+\subsection{Formal model}
+
+Formal models are important to develop because in doing so 
+we specify which social influence components 
+are important, and which are not~\cite{Kauffman1970,Cartwright1999}. 
+Our formal model incorporates three 
+main features we review now. First, we
+formalize our assumptions about what opinions are and how they are generated
+``internally'' in model participants. Next, we formalize the measurement
+process where participants transform their internal, \emph{latent} opinions to
+their reported opinions in one of several ordinal scale bins, e.g., a Likert
+scale. Finally, we develop a statistical model that can generate plausibly
+false detections of group polarization if that is possible, or fail if it is
+not possible, which instead would support a positive finding of group 
+polarization. 
+
+All model calculations are done in the large $N$ limit. This enables us to 
+perform exact calculations to directly find what pre- and post-deliberation variances
+could have generated false detections of group polarization. 
+Theoretically, effect sizes calculated with finite $N$ will be less reliable, if
+anything, so demonstrating that a false discovery occurs even in the large-$N$
+limit is a sort of formal proof that there exists a plausible
+combination of parameters that gives rise to a false group polarization discovery.
+
+Each experimental condition that claims to detect group polarization
+is a ``possible false detection'' (Table~\ref{tab:resultsSummary}). 
+When we determine that a false detection is plausible, that means we have no
+data to decisively say whether or not the published result is reliable, 
+meaning we cannot count it as evidence of group polarization.
+
+After we formally introduce the psychological representation of opinions, we
+will consider how a large collection of opinions becomes a distribution of
+observed ordinal scale opinion ratings, which in turn are used to calculate
+mean pre- and post-deliberation opinions and which, in experimental analyses,
+are tested against one another to detect a significant opinion shift due to
+group polarization. We will attempt to generate pre- and post-deliberation
+observed opinion distributions with different means, but that were 
+generated from two latent distributions with the \emph{same} mean. 
+Different pre- and post-deliberation latent standard deviations are what
+cause different observed mean opinions to be generated, 
+even though latent means are identical.
+
+\subsubsection{Opinions}
+
+We assume that participant $i$'s internal, latent psychological opinion at 
+time of reporting ($t \in \{pre, post\}$) is drawn from a normal distribution
+with mean $\mu_t$ and standard deviation $\sigma_t$,
+\begin{equation}
+  o_{i,t} \sim \mathcal{N}(\mu_t, \sigma_t).
+  \label{eq:opinionDistribution}
+\end{equation}
+\noindent
+All group polarization studies we have reviewed, using both ordinal and
+continuous measures of opinion, make this same assumption, which implicitly
+pools participant data over groups, even though it is well-known that, e.g.,
+the initial extremity of the group predicts the magnitude of the group
+polarization opinion shift~\cite{Myers1982}. Studies such as
+\citeA{Moscovici1969,Myers1970} also implicitly pool over opinion items, on which
+participants give several opinions, but these shifts are given only as an
+average over all items (and groups). Future work should examine the impact of
+this practice, which has been shown to lead to overgeneralizations and
+overestimations of other psychological effects~\cite{Clark1973,Yarkoni2021}.
+
+
+\subsubsection{Experiment model}
+
+\begin{figure}
+  \centering
+
+    \includegraphics[width=1.05\textwidth]{/Users/mt/workspace/Papers/gp-stat/Figures/Model/ExperimentModel.pdf}
+
+  \caption{
+    Schematic diagram of our model of a group polarization experiment.
+    Many experiments add additional complexity, but this simple model suffices
+    for studying the effect of measurement and statistical procedures on 
+    empirical results. For each of the ten case studies presented here 
+    In Step 1, participants have not yet met one another and
+    so report their opinions independently of any experimental social influence.
+    We denote $t=pre$ at this stage, referring to \emph{pre}-deliberation. 
+    In Step 2, a discussion
+    group is formed that has an overall bias in one direction or another.
+    It is through discussion that opinions are hypothesized to change, i.e.,
+    group polarization occurs. At the third and final step, post-deliberation
+    ($t=post$), participants again report their opinions, which, if group 
+    polarization has occurred, have increased in extremity overall. 
+  }
+  \label{fig:modelSchematic}
+\end{figure}
+
+There are many versions of the group polarization experiment, however they all
+share three main steps, which constitute our model here~\cite[p. 143]{Turner1987Book}
+(Figure~\ref{fig:modelSchematic}).
+First, typically before small deliberation groups are formed, participants
+are given a questionnaire on which the indicate their initial opinions on the
+item(s) on the experiment's topic(s) of discussion. 
+% Extant empirical studies
+% assume, as we do here, that participants opinions are being drawn from a
+% latent, normal opinion distribution with latent mean $\mu_{t=pre}$ and
+% latent standard deviation $\sigma_{pre}$. 
+We generate pre-deliberation
+data by first drawing a latent opinion from this distribution, then 
+binning participant opinions into an ordinal opinion scale, which is 
+described in more detail in the next subsection on the Measurement Model.
+
+Next, participants are placed with a small discussion group with all
+or mostly others who share their bias, e.g., towards -3 or +3 on a seven-point
+Likert scale, and then the participants deliberate in these biased 
+groups---though in some conditions
+participants may only display their opinion to others or some other sort of
+twist on communicating individual opinions.
+To form bias groups in our model
+we simply assume participant opinions are drawn from a non-neutral latent mean.
+Deliberation is simulated in the aggregate, with its effects modeled as a possible change
+in mean (if group polarization does indeed occur) and as a decrease in variance
+due to consensus/conformity processes.
+After deliberation, participants again report their opinions. 
+To generate a false detection, we assume that the pre- and post-deliberation
+means are identical ($\mu_{pre} = \mu_{post}$), but their variances are not. 
+
+
+\subsubsection{Measurement model}
+
+\input{/Users/mt/workspace/Papers/gp-stat/ModelFigure.tex}
+
+Our measurement model transforms a distribution of
+pre- or post-deliberation latent opinions into an ordinal-valued
+distribution of ordinal scale opinion measurements. 
+This simulates the three step group polarization experimental design where
+participants do not directly report their continuous latent opinions, but instead 
+report their opinions in terms of a finite set of ordinal bins.
+Formally, this is achieved by integrating over the probability density function
+(Equation~\ref{eq:opinionDistribution}) of opinions for each ordinal scale 
+bin (Figure~\ref{fig:NoChangeHypothesisIllustration}). 
+
+We assume that participants give their opinions in terms of one of $K$ opinion
+bins, with each bin value denoted $b_k$ and indexed by $k=1,\ldots,K$. 
+The array of all bin values a participant may choose is 
+simply $b$. In the popular choice dilemma questionnaires the
+ten opinion bins are $b = \{1, 2, \ldots, 10\}$.
+In this case, we happen to have $b_k = k$.
+A seven-point Likert scale (e.g., -3 strongly disagree, 0 neutral, and +3 
+strongly agree) has $K=7$ bins, $b = \{-3, -2,\ldots,3\}$, i.e.\ 
+$b_1 = -3$ and $b_{K=7} = 3$.  
+
+An individual reports an opinion in bin $b_k$ if their latent opinion is
+within bin thresholds $\theta_{k-1}$ and $\theta_k$. There are
+$K+1$ thresholds, starting from $\theta_0 = -\infty$. Similarly, $\theta_K = \infty$.
+Other than $k=\{0,K\}$, $\theta_k = b_k + 0.5$. Taking the example of a seven-bin
+Likert scale, if $o_{i,t} = 1.4$, then participant $i$ would report a 
+binned opinion of $b_5 = 1$. In this case
+we assume for simplicity that except for thresholds at $\pm \infty$, 
+thresholds are separated by 1 in ``opinion space''---for more on 
+the Cartesian representation of opinions see \citeA{Blau1974}.
+
+We model measurement of $N \to \infty$ participant opinions,
+which results in a histogram of frequency of opinions
+in each bin, i.e., $o_{i,t} = b_k$. The frequency of responses in each bin is 
+the integral over the continuous normal probability density function from 
+one bin threshold to another. This transforms the probability density 
+function from $p(o_{i,t};~\mu_t, \sigma_t)$ to the probability
+of observing a reported opinion of each bin value. 
+The probability of observing an opinion in bin
+$b_k$ is calculated by integrating the normal probability density 
+function over the range of $\theta_{k-1}$ to $\theta_{k}$. 
+Formally, we write the 
+probability of observing an opinion in bin $k$ at time $t$ as
+\begin{equation}
+\begin{aligned}
+  p(o = b_k;\mu_t, \sigma_t, \theta) 
+    &= \int_{\theta_{k-1}}^{\theta_k} p(o;\mu_t, \sigma_t) do \\
+    &= \Phi \left( \frac{o - \mu_t}{\sigma_t} \right)\Big|_{o=\theta_{k-1}}^{\theta_k} \\
+    &= \Phi \left( \frac{\theta_k - \mu_t}{\sigma_t} \right) - 
+       \Phi \left( \frac{\theta_{k-1} - \mu_t}{\sigma_t} \right)
+\end{aligned}
+\label{eq:binFrequency}
+\end{equation}
+\noindent
+where $\Phi(\frac{o - \mu}{\sigma})$ is the normalized 
+normal cumulative distribution function over opinions $o$, shifted by an amount $\mu$ with
+standard deviation $\sigma$.
+
+From this we can calculate the simulated expected value of observed
+opinions at time $t \in \{pre,post\}$, written
+\begin{equation}
+  \langle o_t \rangle = 
+        \sum_{k=1}^K b_k \cdot p(o = b_k ; \mu_t, \sigma_t, \theta).
+  \label{eq:expectedOpinion}
+\end{equation}
+\noindent
+We differentiate this from the mean opinion observed in a particular 
+experimental condition, which we write $\bar{o}_t$. Importantly for performing
+our investigation of whether published findings may be false detections,
+it is vanishingly rare that the latent mean and expected observed value
+are identical, i.e.\ it is rare to find $\mu_t = \langle o_t \rangle$.
+This occurs only for $\mu_t$ at the exact midpoint of the ordinal
+opinion measurement scale. This fact underlies our method for generating
+false detections explained in the following subsection.
+
+
+
+\subsubsection{False detection model}
+
+
+We use our model to re-evaluate the reported results to see if, in fact,
+the null hypothesis is plausible, i.e.\ there is plausibly no difference 
+between pre- and post-deliberation means.
+To do this, we test data from published experiments assuming the null
+hypothesis, i.e.  $\mu_{pre} = \mu_{post}$. 
+We demonstrate that the null hypothesis 
+is often plausible, i.e., that there was in fact no shift in group opinions.
+We do this by first finding a latent mean that generates the observed pre- and 
+post-deliberation means ($\langle o_{i,pre} \rangle$ and $\langle o_{i,post} \rangle$) 
+reported in published studies, 
+for certain pre- and post-deliberation latent standard deviations 
+($\sigma_{pre}$ and $\sigma_{post}$). The challenge is to identify which
+$\sigma_t$ generate false detections.
+
+To find $\sigma_t$ we might first think to simply set the observed mean
+equal to the calculated mean, i.e., $\bar{o}_t$. However, it is not clear if
+this is tractable to solve directly.
+Therefore, we solve for $\sigma_{t}$ numerically by finding the 
+the $\sigma_t$ that minimizes 
+the squared error between the observed mean, $\bar{o}_t$, and the
+simulated observed mean, $\langle o_t \rangle$, i.e.
+\begin{equation}
+  \begin{aligned}
+     \sigma_t & = \argmin_{\sigma}~(\bar{o}_t   - \langle o_t \rangle)^2 
+        = \argmin_{\sigma}~(\bar{o}_t   - \sum_{k=1}^K b_k \cdot p(o = b_k ; \mu_t, \sigma_t, \theta)^2  \\
+       & \text{s.t. } |\bar{o}_t - \langle o_t \rangle| < \epsilon 
+  \end{aligned}
+    \label{eq:argmin}
+\end{equation}
+\noindent
+where $\epsilon$ is the error tolerance. We will find that different studies
+allow for finding $\sigma_t$ with larger or smaller $\epsilon$. Note that since 
+all bins are unit distance from one another, it is reasonable to set 
+$\epsilon \sim 0.1$, especially since we are comparing large-$N$ simulations
+with finite-$N$ observations. However, we use the smallest possible
+$\epsilon$ we can as long as it is at most on the order of 0.1; the values of
+$\epsilon$ used for each condition is available in an Excel spreadsheet
+we have provided as supplemental information.  
+
+There are two ways for this search to fail. First, there could be total
+failure, i.e.\ no
+$\sigma$ that generate both pre- and post-deliberation 
+distributions whose means match those reported in a given experimental 
+condition. Second, a solution to Equation~\ref{eq:argmin} may be found, 
+but the solution $\sigma$ is too large, which yields a highly ``bi-polarized''
+distribution that is not feasible in most group polarization studies,
+which do not contain groups of opposing viewpoints.
+
+
+\subsection{Model implementation and analysis}
+
+We implemented the model in R using primarily built-in or open source
+packages~\cite{RLang}. We programmed a simple hillclimbing algorithm
+to solve the optimization problem in Equation~\ref{eq:argmin} to find 
+which latent standard deviations $\sigma_{pre}$ and $\sigma_{post}$
+generate the observed data for a given observed group polarization
+opinion shift.
+
+To facilitate the use and re-use of this code, we also developed
+a Shiny web application\footnote{https://mt-digital.shinyapps.io/grouppolarizationstatmod/} 
+to specify observed pre- and post-deliberation
+mean opinions, a hypothesized latent mean, the measurement scale, and
+to vary hillclimbing parameters (step size and stopping condition). This
+app will display theoretical histograms of responses for the binned
+latent pre- and post-deliberation opinion distributions.  
+
+In each study, we tabulate the number of plausible false discoveries made out
+of the number of potential false discoveries, which is equal to the number of
+experimental conditions in each study. 
+For example, in the case study of \citeA{Schkade2010} 
+we analyze below, they calculate group polarization opinion shifts in
+six experimental conditions. The conditions arise from two 
+geographical locations where groups were assembled (Boulder, CO and Colorado
+Springs, CO) and three deliberation topics (affirmative action, 
+civil unions, and global warming). For this case study,
+we inspect each of the six conditions to determine if the observed shift
+reported for each condition is plausibly a false detection arising from 
+simple a consensus process (reduction in opinion variance from pre- to 
+post-deliberation) instead of a group polarization process. For each
+of the 62 experimental conditions we inspected across ten case studies,
+we made this determination of plausibility of the null hypothesis and recorded
+the latent mean and latent pre- and post-deliberation standard deviations,
+and hillclimbing step size parameter,
+that gave rise to our counterexample data supporting our assertion of a 
+plausibly false detection. 
+
+With all case studies inspected this way,
+we obtained a table with columns Study, Experimental Condition, and
+whether the detection was Plausibly False. We then calculated the worst-case
+false detection rate for individual studies and a global worst case
+false discovery rate across all ten original published studies (files with
+original data and analyses will be available in a supplement). 
+
+We developed our model to analyze published results demonstrating 
+group polarization and other opinion shifts to determine whether shift
+detections are actually plausibly false. We evaluated 62 experimental
+conditions across ten influential published studies. Our approach can and should be
+applied to more studies. This can be achieved by the following 
+strategy that we used to perform our Analysis presented in the next section.
+We can only provide the worst case false detection rate because we do not, 
+and can not in any of the case studies, 
+know if plausibly false detections are false or not. This is not a comfort,
+since this means that plausibly false detections are unreliable, i.e.,
+of no practical scientific value. If original source data had been provided
+then the data could have been re-analyzed with proper statistical methods,
+and perhaps discoveries of group polarization could be confirmed.
+
+More specific information about how our model and hillclimbing algorithm
+for solving Equation~\ref{eq:argmin} were implemented can be found in the 
+Appendix.
+
+
+
+\section{Analysis}
+
+We now show our results of applying our model to analyze whether published
+detections of group polarization are false. We chose ten influential 
+group polarization studies published between 1969 and
+2010.  Each case study has one or more experimental conditions in which a 
+group polarization opinion shift was hypothesized to occur. The studies
+reported experimental data and possibly associated statistical tests
+to support their hypothesis that group polarization occurred in groups
+subjected to these conditions.
+  
+Across the ten case studies, we found that 92\% of group polarization
+detections are plausibly false according to our model. No studies
+had a false detection rate below 50\% (Table~\ref{tab:resultsSummary}),
+This means that for each published group polarization paper, at least half of
+their group polarization detections are explained by simple conformity.
+\citeA{Myers1970} and~\citeA{Myers1975} had the lowest plausibly 
+false detection rates (67\% and 50\%, respectively), 
+possibly due to their use of 18-point Likert scales and highly
+charged deliberation topics, including racism and gender roles and
+relations in the United States.
+
+\vspace{2em}
+
+\input{/Users/mt/workspace/Papers/gp-stat/FalseDiscoveryRatesCustomized.tex}
+
+\section{Discussion}
+
+In this paper we showed that many published studies presented plausibly 
+false detections of group polarization that could be equivalently described
+as conformity to the initial group mean, not to a more extreme mean. 
+This was enabled by the use
+of metric statistical models to make inferences about ordinal valued data,
+which induces ceiling effects that mask changes in opinions among the most
+extreme group members.  Because the original data is not
+available, we cannot, can show that the observed effects are 
+true or false detections, nor can anyone else. 
+Unfortunately for the authors of these studies and
+for psychological science in general, this means that the results cannot be
+used to support the theoretical explanations of group polarization they were
+meant to. Furthermore, it causes us to doubt whether there is a group polarization
+effect at all. 
+
+The immediate solution is clear: use appropriate statistical procedures 
+for group polarization research that uses ordinal opinion measurement
+scales, but assumes opinions are countinuous. 
+This means we must expand our statistical models to incorporate opinion binning.
+This can be achieved through the use of ordered probit models, or any other
+statistical model that treats observed data as ordinal, and generated from 
+binning continuous opinions into categorical bins. In the course of our study
+we also found that statistical models of group polarization failed to account
+for the multilevel, and sometimes hierarchical, structure of group polarization
+data. This must also be accounted for in the design of valid, robust 
+statistical models of group polarization. 
+
+
+\subsection{Is group polarization real?}
+
+It may seem that we have little justification left for asserting the reality of
+group polarization. We have demonstrated many detections of group polarization
+are plausibly false. Furthermore, in the course of this study, 
+we observed that significant sources of variance are regularly not 
+accounted for in statistical models used in group polarization research. 
+This results in a lack of multilevel structure in statistical models that
+tends to lead to overestimates of effect sizes and underestimates of 
+confidence interval widths~\cite{Clark1973,Yarkoni2021}.
+The theoretical weaknesses identified earlier and these facts may seem to 
+kill off any potential reality of group polarization. No research data is available
+from previous studies, so the data cannot be re-analyzed.
+Although we may no longer count group polarization as an empirical reality
+(pending new work using appropriate statistical methods), 
+there are several theoretical reasons to believe that properly designed studies
+will find, in certain cases, that group
+opinions become more extreme following deliberation. 
+
+% Existing theories and explanations of group polarization contain 
+% some valid, empirically supported points that should be incorporated
+% in group polarization theory going forward. Persuasive arguments theory is right to hypothesize a
+% relationship between language and extremism. Self-categorization theory 
+% correctly identifies the emotional importance of unambiguous group
+% membership. The social decision schemes explanation predicts that if extremists are
+% more powerful or influential, then group polarization will occur. 
+
+% (REMOVED REVIEW OF EXISTING THEORIES OF GROUP POLARIZATION --- STILL NEED TO
+% FINISH THIS SUBSECTION, BUT MAYBE JUST CONDENSE ALL THESE INTO ONE PARAGRAPH)
+% First, to address persuasive arguments theory, 
+% it certainly matters what language and communication strategies are used.  % (\cite{Hart2005,Druckman2007,Kalmoe2014,Flusberg2017,Kalmoe2018}). 
+% Linguistic frames modulate the perceived meanings of words and sentences~\cite{Fillmore1982,Chong2007,Cacciatore2016}.
+% These frames often become norms that are shared, repeated, and 
+% modified by group members.
+% In this process linguistic frames co-evolve with the meanings of words~\cite{Hamilton2016,Garg2018,Hawkins2020}.
+% Metaphorical framing provides a particularly strong example of how language can
+% lead to extremism. \citeA{Kalmoe2014,Kalmoe2018} found that using violence
+% metaphors to describe political issues and events (e.g., ``EPA regulation
+% is \emph{strangling} the economy'') led participants to increase their support
+% for real world violence to reach political goals---this effect was even more
+% pronounced among the most trait aggressive participants.
+
+% Self-categorization theory is right that it is a fundamental human capacity 
+% to evaluate one's own and others' group membership status~\cite{Cikara2014,Cikara2017}. 
+% The desire to clearly belong
+% to one's in-group may well motivate individuals to increase their extremism 
+% in such a way as to lead to more clear signals of group membership, whether that is
+% from being drawn towards the direction others are tending, or to be more
+% clearly different from a perceived out-group.
+% Whether this is achieved through a calculation of the 
+% hypothesized ``meta-contrast ratio''~\cite{Turner1987} is less clear.
+% Using the meta-contrast ratio as a theoretical variable
+% calculated in the brain lacks the sort of mechanical explanation of behavior
+% as Bayesian cognitive models. To ensure the validity of the meta-contrast ratio,
+% or any other theoretical psychological calculation, one must co-develop a 
+% mechanistic model of how the value is calculated~\cite{Jones2011}.
+
+% Social decision schemes models of group polarization posit that there exist
+% individual-level decision making traits (e.g., the ability to find or identify
+% a solution to some problem) and group-level decision making schemes (e.g.,
+% the group must unanimously vote to choose an opinion or behavior)~\cite{Brown2000}. 
+% Power dynamics are an important component for determining the 
+% social decision scheme used by a group~\cite{Friedkin1999a}.
+% If it is the case that that one can enumerate individual-level traits and group-level
+% decision schemes and power structures, then the social decision scheme model 
+% can theoretically be used to predict group decisions, opinions, and 
+% resulting behavior~\cite{Zuber1992,Friedkin1999a}. If the social decision
+% scheme model encodes or evolves extremists to be more powerful, then group
+% polarization will emerge. If extremists dominate the conversation, which seems
+% like it may plausibly occur often, then group polarization will emerge.
+% One issue here is the introduction of the social decision scheme construct, 
+% which itself would be subject to cultural evolutionary pressures depending
+% on group constitution and estimated payoffs of different strategies~\cite{King-Casas2005}. 
+% The idea of payoffs in a group polarization context is potentially problematic
+% as well since there is no tangible benefit to finding consensus, becoming
+% more extreme, etc. It can only be understood as emotionally beneficial.
+
+% Finally, we believe group polarization will again be considered a real
+% empirical phenomenon due to its emergence
+% in different agent-based computational models of 
+% social influence. These social influence
+% models make various empirically supported assumptions about 
+% individual- and dyad-level social influence capacities and
+% behavior~\cite{Baldassarri2007,Mueller2018,Banisch2019}, including the
+% observation that group polarization effect size increases with initial
+% group extremism~\cite{Myers1982,Turner2020}. 
+% The common factor that leads to simulated group polarization in these models
+% is the assumption that more extreme individuals are also more stubborn.
+% In other words, these modeling results have showed that if extremists
+% are more stubborn than centrists, then group polarization will emerge.
+% Empirical evidence suggests extremists may 
+% indeed be more stubborn than centrists~\cite{Kinder2017,Reiss2019}, 
+% so by \emph{modus ponens} 
+% group polarization should tend to emerge, as long as auxiliary
+% theoretical criteria are met~\cite{Meehl1990}.
+% Note the similarity to social decision schemes theory that predicts
+% group polarization will occur when extremists are more powerful, i.e., exert
+% a greater influence. This seems homologous to the case where extremists are
+% less influenced than centrists due to greater stubbornness.
+
+Even if we expect to observe group polarization in some
+contexts with more rigorous methods, it is not clear which contexts. 
+As Brown (1986) observed (quoted in the epigraph to this paper), 
+group polarization often occurs, 
+but inconsistently, and the effect is not 
+always large. Explaining this context-dependence of group polarization 
+is, in our opinion, the next step for group polarization research. Valid 
+statistical models are necessary to reliably move forward.
+
+
+\subsection{Statistical model features and implementation for valid group polarization measurement}
+
+Future research on group polarization needs a valid statistical measurement
+procedure for quantifying group polarization. As we have demonstrated, one requirement
+for a valid statistical procedure is that the data must be represented as
+ordinal measurements, not continuous and normally distributed.  
+In the course of our work, we also observed that each group should have its own
+mean and variance in pre- and post-deliberation opinions, and similarly
+different items have been observed to vary in their response distributions.
+Failing to account for this multilevel structure is known to lead to overconfident
+overestimates of effect sizes. Therefore
+group polarization statistical models must include this multilevel structure
+to be valid. One model that can meet these needs is the ordered probit model
+that combines a normal model of latent opinions with an ordinal model of
+ordinal measurement data. 
+
+% One must use Bayesian statistical methods to 
+% calculate parameters in a multilevel model. In the following paragraphs we
+% explain the requirements for statistical models group polarization and 
+% their implementation in more detail.
+
+% A statistical model for ordinal observations needs to encode the ordinality
+% and non-normality of categorical survey responses, e.g., opinions given on a Likert
+% scale. In our Analysis above, we showed the dire consequences of failing to
+% account for the non-normality of ordinal measurement data. We showed that
+% a decrease in pre- to post-deliberation variance can produce two datasets 
+% that appear to have different means when they were in fact generated from
+% latent distributions with the same mean. This exact phenomenon of
+% consensus formation, where opinion variance decreases as consensus is formed,
+% has been observed in group polarization studies, as plotted in Figure 2 by
+% \citeA{Schkade2010}. 
+
+A statistical model must also account for the multi-level structure of
+group polarization data. Literally all published articles we reviewed failed
+to account for this structure. This probablem is totally perpendicular to the
+one analyzed in this current paper, but it is equally critical for ensuring
+valid inferences. Failure to account for multilevel structure can inflate effect sizes and
+shrink confidence intervals if groups vary in their standard deviation of
+opinions, which could falsely indicate significant
+pre- and post-deliberation differences~\cite{GelmanHillRegression,Yarkoni2021}. 
+We would expect systematic inter-group and inter-item variation in group polarization data, 
+as well as other factors depending on the exact experimental design.
+
+One statistical model that represents ordinal measurements of metric
+data is the ordered probit model~\cite[Ch. 23]{Kruschke2015}. 
+The ordered probit model combines a normal
+model of latent psychological opinions (equivalently beliefs, attitudes, etc.)
+with an ordinal model of observed data.  In addition to latent normal opinion 
+distribution parameters mean and variance, there are additional parameters that represent
+the binning of opinions into ordinal survey responses. 
+These are the thresholds, $\theta_k$, which we were free 
+to set constant in our generative model.
+To fit a multilevel ordered probit model, one must fit the model
+using Bayesian methods, which, unlike frequentist methods, can account for several,
+even hundreds, of groups across multiple levels~\cite{Liddell2018}.
+
+
+\subsection{Open science to improve group polarization research}
+
+This current paper and project could have provided much stronger conclusions
+about the validity of published results if group polarization researchers had 
+followed current open science best-practices.
+Open science practices, including open data sharing, data and metadata standards,
+and publishing analysis code, can improve scientific outcomes 
+generally~\cite{Hart2016,Smaldino2019,Samuel2021}.
+Our study would have been further streamlined if group polarization research data was
+stored in a central database, accessible through an API for automated gathering
+and analysis. If we had access to the original data formats, our paper would not have 
+simply shown existing findings are plausibly false or not. Instead we could have
+re-analyzed the existing data with more appropriate ordinal statistical 
+models~\cite{Liddell2018}.  However, if that data was haphazardly stored in
+disparate personal websites, or even just in separate Open Science Foundation 
+data repositories, then the process would be extremely tedious, and 
+analyses of additional datasets would be needlessly time consuming. 
+
+
+
+% Current theoretical explanations of
+% group polarization rely on auxiliary assumptions that are not empirically
+% supported, e.g., the existence of norms and prototypes regarding extremism
+% in the social comparisons and the implicit assumption that group membership
+% itself has no effect on informational influence processes. While the data
+% might appear to support a particular theoretical explanation, it may be the 
+% case that auxiliary assumptions are not supported, and thus the theory is 
+% \emph{a priori} invalid, and consequentially so are any explanations deriving
+% from that theory~\cite{Meehl1990}. 
+% Going forward, problematic auxiliary assumptions can be avoided by 
+% developing mechanistic models of 
+% theoretical entities such as opinions and norms, and processes such as 
+% calculating group prototypes, been highlighted as placeholders which
+% we do not yet understand well~\cite{Machamer2000,Craver2006}. 
+
+
+
+
+% In our analysis of whether or not group
+% polarization exists, we identified some simple core assumptions made by
+% existing theories of group polarization, stripped of many of the potentially
+% unnecessary and problematic auxilliary assumptions. Identifying
+% these core assumptions is just one step in a larger project of 
+% advancing group polarization theory. This work should be
+% continued to try to integrate existing group polarization theories into a
+% more parsimonious form that makes as few auxiliary assumptions as possible.
+
+% Then perhaps the lack of
+% empirical support for these assumptions could be noted, with plans or calls
+% to add empirical support. Better yet, those auxiliary assumptions should be
+% supported separately.  At the least it is necessary to identify and explain
+% these placeholders in order to make honest scientific progress on
+% explaining group polarization. Methodological problems with statistical
+% procedures identified here may well be remedied with improved, mechanistic
+% approaches to modeling group-level behavior~\cite{Yarkoni2021,Turner2021}.
+
+% \subsubsection{Representation and measurement of opinions}
+
+% Another important theoretical and modeling point is that it is perhaps time
+% to more seriously critique the use of numbers to represent opinions, and
+% explore changes in opinions using alternatives to survey methods. For instance,
+% one might measure opinions implicitly, as in the implicit attitude test (IAT)
+% that measures participant reaction time in a task requiring the identification
+% of revealing items. Does IAT reaction time change following group discussion? 
+
+% Or, in an alternative approach to ordinal data, why not just use continuous 
+% opinion measures? This may be worth exploring in more detail after some of
+% the other statistical issues are addressed, such as implementing multi-level
+% models that account for group-level variation in group polarization 
+% magnitude.  One reason to not use continuous opinion measures is that there
+% are more pressing theoretical issues with group polarization experiments that
+% should be addressed first.  It seems just as easy to transition studies of 
+% group polarization to use the appropriate statistical model for detecting group 
+% polarization~\cite{Liddell2018} as it would be to transition to adopt
+% continuous measures of group polarization.
+% Finally, Likert measurements may be more reliable than continuous measurements,
+% especially in the context of online experiments~\cite{Toepoel2018}.
+
+
+
+\subsection{Conclusion}
+
+We developed a measurement and statistical model of group polarization that
+invalidated the results of several published studies when we analyzed those
+studies' supporting data.
+While not all observations of the group polarization effect
+are invalidated by our model, many of the ones we studied are
+widely referenced and high profile---even though some are decades old, they
+continue to motivate new work~\cite{Mas2013,Keating2016,Sieber2019,Pallavicini2021}.
+Even the literature that does not apply continuous statistical models to
+ordinal data has separate problems, including possible theoretical 
+inconsistencies, overgeneralizations from underrepresentative sampling and
+failing to account for important sources of variance, and a lack of publicly
+available data.
+
+By examining the effects of measurement and statistics in detail, we 
+demonstrate that future work on group polarization must use ordinal 
+statistical models to analyze ordinal data. This effort will be further supported 
+by the adoption of open science practices for the further refinement of
+research methods and new analyses and theorizing.
+
+
+
