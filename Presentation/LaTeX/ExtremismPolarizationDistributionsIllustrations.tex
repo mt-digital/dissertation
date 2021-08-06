@@ -1,0 +1,228 @@
+\documentclass{article}
+    % General document formatting
+    \usepackage[margin=0.7in]{geometry}
+    \usepackage[parfill]{parskip}
+    \usepackage[utf8]{inputenc}
+    \usepackage{pgfplots}
+    \usepackage{subcaption}
+    
+    % Related to math
+    \usepackage{amsmath,amssymb,amsfonts,amsthm} 
+
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+% Bi-modal distribution to illustrate different levels of polarization. The
+% first two arguments are the centers of each distribution. The third
+% argument is the standard deviation shared by both modes.
+\pgfmathdeclarefunction{doubleGauss}{3}{%
+  \pgfmathparse{
+    1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#3^2)) +
+    1/(#2*sqrt(2*pi))*exp(-((x-#2)^2)/(2*#3^2))
+
+  }%
+}
+
+% Use approximation as given for the normal CDF in this TeXExchange post:
+% https://tex.stackexchange.com/questions/60950/how-to-draw-cdf-of-normal-distribution-in-tikz.
+% Argument 1 is the lower bound of the integral over PDF, argument 2 is the 
+% upper bound of the integral.
+\pgfmathdeclarefunction{normcdf}{4}{
+  \pgfmathparse{
+    1/(1 + exp(-0.07056*((#2-#3)/#4)^3 - 1.5976*(#2-#3)/#4)) -
+    1/(1 + exp(-0.07056*((#1-#3)/#4)^3 - 1.5976*(#1-#3)/#4)) 
+  }
+}
+
+\def\cdf(#1)(#2)(#3){0.5*(1+(erf((#1-#2)/(#3*sqrt(2)))))}
+
+% \tikzset{
+%     declare function={
+%         normcdf(\x,\m,\s)=1/(1 + exp(-0.07056*((\x-\m)/\s)^3 - 1.5976*(\x-\m)/\s));
+%     }
+% }
+
+
+% Moscovici & Zavalloni DeGaulle Data
+\newcommand\observedMeanPre{0.9}
+\newcommand\observedMeanPost{1.2}
+\newcommand\latentMean{1.0}
+\newcommand\latentSDPre{2.5}
+\newcommand\latentSDPost{1.0}
+\newcommand\simObsSDPre{1.92}
+\newcommand\simObsSDPost{1.08}
+
+\newcommand\plotWidth{4in}
+\newcommand\plotHeight{2.5in}
+
+
+\begin{document}
+
+\begin{figure}
+% \vspace{0.5em}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[
+  no markers, domain=-4:4, samples=100,
+  axis lines*=left, xlabel=$o_{i,t}$, ylabel=Frequency,
+  % y label style={{(axis description cs:0.5,-0.03)},anchor=south},
+   ylabel near ticks,
+%   ylabel shift={-1},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=\plotHeight, width=\plotWidth,
+  xtick={-3, -2, -1, 0, 1, 2, 3}, 
+  % ytick=\empty,
+  enlargelimits=false, clip=false, axis on top,
+  % legend entries={Pre-deliberation},
+  % legend style={at={(axis cs:-3.85,0.45)},anchor=north west}
+%   grid = major
+  ]
+    
+  \newcommand\exampleMean{1.0}
+  \newcommand\exampleSD{1.0}
+    
+    \addplot [very thick,pink, line width = 3pt] {gauss(\exampleMean, \exampleSD)};
+    % \addplot [very thick,green!65, line width = 3pt] {gauss(\latentMean, \latentSDPost)};
+    
+    
+    \node at (axis cs:\exampleMean,0.5) [anchor=south] {$\mu = \exampleMean$};
+    \addplot [gray] coordinates {(\exampleMean, 0) (\exampleMean, 0.5)};
+
+  % \node at (axis cs:-4,0.55) [anchor=south] {\large{\textbf{\textsf{A}}}};
+  \end{axis}
+
+  \end{tikzpicture}
+  \caption{}
+\end{figure}
+
+
+\begin{figure}
+% \vspace{0.5em}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[
+  no markers, domain=-4:4, samples=100,
+  axis lines*=left, xlabel=$o_{i,t}$, ylabel=Frequency,
+  % y label style={{(axis description cs:0.5,-0.03)},anchor=south},
+   ylabel near ticks,
+%   ylabel shift={-1},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=\plotHeight, width=\plotWidth,
+  xtick={-3, -2, -1, 0, 1, 2, 3}, 
+  % ytick=\empty,
+  enlargelimits=false, clip=false, axis on top,
+  % legend entries={Pre-deliberation},
+  % legend style={at={(axis cs:-3.85,0.45)},anchor=north west}
+%   grid = major
+  ]
+    
+  \newcommand\exampleMean{2.5}
+  \newcommand\exampleSD{1.0}
+    
+    \addplot [very thick,pink, line width = 3pt] {gauss(\exampleMean, \exampleSD)};
+    % \addplot [very thick,green!65, line width = 3pt] {gauss(\latentMean, \latentSDPost)};
+    
+    
+    \node at (axis cs:\exampleMean,0.5) [anchor=south] {$\mu = \exampleMean$};
+    \addplot [gray] coordinates {(\exampleMean, 0) (\exampleMean, 0.5)};
+
+  % \node at (axis cs:-4,0.55) [anchor=south] {\large{\textbf{\textsf{A}}}};
+  \end{axis}
+
+  \end{tikzpicture}
+  \caption{}
+\end{figure}
+
+
+
+%%%%% BEGIN POLARIZAITON EXAMPLES %%%%%
+
+\begin{figure}
+% \vspace{0.5em}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[
+  no markers, domain=-4:4, samples=100,
+  axis lines*=left, xlabel=$o_{i,t}$, ylabel=Frequency,
+  % y label style={{(axis description cs:0.5,-0.03)},anchor=south},
+   ylabel near ticks,
+%   ylabel shift={-1},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=\plotHeight, width=\plotWidth,
+  xtick={-3, -2, -1, 0, 1, 2, 3}, 
+  % ytick=\empty,
+  enlargelimits=false, clip=false, axis on top,
+  % legend entries={Pre-deliberation},
+  % legend style={at={(axis cs:-3.85,0.45)},anchor=north west}
+%   grid = major
+  ]
+    
+  \newcommand\exampleMeanOne{-1.0}
+  \newcommand\exampleMeanTwo{1.0}
+  \newcommand\exampleSD{0.25}
+    
+    \addplot [very thick,pink, line width = 3pt] {
+      doubleGauss(\exampleMeanOne, \exampleMeanTwo, \exampleSD)
+    };
+    % \addplot [very thick,green!65, line width = 3pt] {gauss(\latentMean, \latentSDPost)};
+    
+    
+    \node at (axis cs:\exampleMeanOne,0.5) [anchor=south] {$\mu_1 = \exampleMeanOne$};
+    \addplot [gray] coordinates {(\exampleMeanOne, 0) (\exampleMeanOne, 0.5)};
+
+    \node at (axis cs:\exampleMeanTwo,0.5) [anchor=south] {$\mu_2 = \exampleMeanTwo$};
+    \addplot [gray] coordinates {(\exampleMeanTwo, 0) (\exampleMeanTwo, 0.5)};
+
+  % \node at (axis cs:-4,0.55) [anchor=south] {\large{\textbf{\textsf{A}}}};
+  \end{axis}
+
+  \end{tikzpicture}
+  \caption{}
+\end{figure}
+
+
+\begin{figure}
+% \vspace{0.5em}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[
+  no markers, domain=-4:4, samples=100,
+  axis lines*=left, xlabel=$o_{i,t}$, ylabel=Frequency,
+  % y label style={{(axis description cs:0.5,-0.03)},anchor=south},
+   ylabel near ticks,
+%   ylabel shift={-1},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=\plotHeight, width=\plotWidth,
+  xtick={-3, -2, -1, 0, 1, 2, 3}, 
+  % ytick=\empty,
+  enlargelimits=false, clip=false, axis on top,
+  % legend entries={Pre-deliberation},
+  % legend style={at={(axis cs:-3.85,0.45)},anchor=north west}
+%   grid = major
+  ]
+    
+  \newcommand\exampleMeanOne{-2.0}
+  \newcommand\exampleMeanTwo{2.0}
+  \newcommand\exampleSD{0.25}
+    
+    \addplot [very thick,pink, line width = 3pt] {
+      doubleGauss(\exampleMeanOne, \exampleMeanTwo, \exampleSD)
+    };
+    % \addplot [very thick,green!65, line width = 3pt] {gauss(\latentMean, \latentSDPost)};
+    
+    
+    \node at (axis cs:\exampleMeanOne,0.5) [anchor=south] {$\mu_1 = \exampleMeanOne$};
+    \addplot [gray] coordinates {(\exampleMeanOne, 0) (\exampleMeanOne, 0.5)};
+
+    \node at (axis cs:\exampleMeanTwo,0.5) [anchor=south] {$\mu_2 = \exampleMeanTwo$};
+    \addplot [gray] coordinates {(\exampleMeanTwo, 0) (\exampleMeanTwo, 0.5)};
+
+  % \node at (axis cs:-4,0.55) [anchor=south] {\large{\textbf{\textsf{A}}}};
+  \end{axis}
+
+  \end{tikzpicture}
+  \caption{}
+\end{figure}
+
+\end{document}

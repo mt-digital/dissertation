@@ -62,8 +62,12 @@ These explanations may explain the empirical phenomenon of group polarization,
 though more formal modeling is required to bring precision to the underlying 
 theories~\cite{Smaldino2017StupidModels,Smaldino2019b}. 
 
-We present an alternative explanation for group polarization that, while not mutually exclusive with the other theories discussed, manages to explain the phenomenon of group polarization without assuming anything about the intrinsic distribution of extreme opinions in human groups. We do so by appealing to a property of human psychology we call  
-\emph{stubborn extremism}: as a person's opinion on
+We present an alternative explanation for group polarization that, while not mutually exclusive with the other theories discussed, 
+manages to explain the phenomenon of group polarization without assuming anything about the intrinsic distribution of extreme opinions in human groups. 
+This is important because the extant theories of group polarization outlined above 
+make auxiliary assumptions that add needless complexity and are perhaps not well supported.
+We demonstrate that group polarization emerges when we assume the psychological
+property of \emph{stubborn extremism}: as a person's opinion on
 some topic becomes more extreme, that opinion also becomes more stubborn, 
 i.e.\, less susceptible to social influence. 
 We support this explanation using a computational model of group polarization. 
@@ -73,6 +77,32 @@ The model incorporates both negative, repulsive social influence~\cite{Cikara201
 and the stubborn extremism assumption, though repulsive influence is not at work
 in group polarization because all opinions start out similarly valenced.   
 
+Theories can be thought of as one or a few central assumptions, or hypotheses
+to be supported, conjoined with
+auxiliary assumptions about how a phenomenon of interest emerges (group polarization
+being our phenomoenon of interest). Together all these assumptions form the antecedent in a logical implication,
+with the phenomenon of interest as the consequent.
+Parsimony is a useful measure of how many central or
+auxiliary assumptions a theory makes---more parsimonious theories explain the same 
+empirical observations (group polarization here) with fewer assumptions. 
+More parsimonious theories are generally preferred because they are easier to 
+interpret.  
+One reason more parsimonious theories are often preferred are because they are
+easier to interpret. 
+
+We use computational modeling to simulate social behavior that leads to
+group polarization under a set of empirically motivated assumptions, 
+including the stubborn extremism assumption. 
+Such modeling enables us to build a simulated world where group polarization is not assumed, only
+a small set of basic psychological mechanisms. In this way, our computational 
+model is a mechanistic model provides a concrete system that encapsulates
+a theory's assumptions that make up the antecedent of our scientific proposition.
+We use this approach to demonstrate that the relatively minimal assumptions
+of stubborn extremism, along with a few other context-independent cognitive
+factors, can lead to the emergence of group polarization in computer simulations.
+
+(THIS IS REPEAT BELOW, OLD FROM COG SCI PAPER. NEED TO COMBINE AND SMOOTH OUT 
+WITH NEW STUFF ABOUT SCIENTIFIC INFERENCE)
 Group polarization can emerge computationally by simply 
 assuming agents hold binary opinions on a multitude of topics~\cite{Mueller2018,Banisch2019}. 
 However, most group polarization studies do not measure participants' binary opinions (e.g., for vs.\ opposed) on a multitude of topics, but rather measure opinions as falling on a range between strongly for and strongly opposed. Furthermore, the assumption of discrete opinions is problematic from a psychological perspective,
@@ -138,6 +168,17 @@ infinitely stubborn extremists who are totally unsusceptible to social influence
 Because it is unlikely that anyone is totally unsusceptible to social influence,
 we allow individuals to become more stubborn as they become more extreme.
 
+In this present study we create a model group polarization experiment with the
+goal of demonstrating the explanatory power of the stubborn extremism explanation.
+We believe that this explanation is more parsimonious in that it makes fewer,
+simpler assumptions about human behavior while accounting for both group
+polarization itself and the empirical observation that the group polarization
+opinion shift increases with initial group extremism. In order to understand
+the model and computational analysis it is necessary to first identify 
+common experimental design elements in group polarization studies. Second,
+it is necessary to understand in more detail how stubborn extremism explains
+group polarization and how it relates to other theoretical explanations of
+group polarization. These topics are reviewed in the remainder of this section.
 
 \subsection{Common experimental design elements}
 

@@ -49,9 +49,10 @@
 \usepackage{multicol}
 \usepackage{tabulary}
 \usepackage{tabularx}
+\usepackage{makecell}
 \usepackage{pgfplots}
 \usepackage{longtable}
-% \usepackage{url}
+\usepackage{url}
 \usepackage{float}
 \usepackage{subcaption}
 \usepackage{booktabs}
@@ -83,7 +84,7 @@
 % Note: This may not work correctly with all DVI viewers (i.e. Yap breaks).
 \usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=black, citecolor=black, urlcolor=black,plainpages=false,pdfpagelabels]{hyperref}
 \hypersetup{ pdfauthor = {Your Name Here}, pdftitle = {The Title of The Dissertation}, pdfkeywords = {Keywords for Searching}, pdfcreator = {pdfLaTeX with hyperref package}, pdfproducer = {pdfLaTeX}}
-
+\usepackage{url}
 \usepackage{cleveref}
 %% GRAPHICX - This is the standard package for including graphics for latex/pdflatex.
 \usepackage{apacite}
@@ -136,7 +137,7 @@
 
 
 \begin{dedication} % The style file will format this for you.
-  To Phoebe Ruth Bernacchi-Turner.  \\[2em]
+  To Phoebe Ruth.  \\[2em]
   As Daniel Tiger and his parents sing, ``We gotta look a little 
   closer to see just how things go.'' Taking care of you makes me happy, 
   too---and caring for you has pushed me to try to 
@@ -171,10 +172,11 @@
 %  The same choices that applied to the dedication apply here.
 
 \begin{epigraph} % The style file will position the text for you.
-  \emph{Toute v\'{e}rit\'{e} et toute action \\
-  impliquent un milieu et une subjectivit\'{e} humaine.}\\[2em]
-  Every truth and every action \\
-  emerges in the context of human culture and human subjectivity.\\[2em]
+  \emph{Toute v\'{e}rit\'{e} et toute action impliquent \\
+  un milieu et une subjectivit\'{e} humaine.}\\[2em]
+
+  All truths and actions emerge in the context \\
+  of human culture and human subjectivity.\\[2em]
 
   ---Jean Paul Sartre, ``L'Existentialisme est un Humanisme'', 1946
 \end{epigraph}
@@ -289,7 +291,8 @@ cognitive science.
 \begin{abstract}
   Rising extremism and polarization threaten democratic institutions worldwide.
   As opposing factions become more extreme in their opinions, polarization
-  widens the chasm between fellow citizens, and common ground erodes, washed
+  increases---the chasm widens the chasm between fellow citizens, 
+  and common ground erodes, washed
   away down a river of vitriol, bitterness, and hate. What causes increased
   extremism and polarization? Due to the highly complex nature of human
   societies, this problem of explaining polarization must be broken down into
@@ -310,11 +313,12 @@ cognitive science.
 
   Second, I show that rising extremism
   in isolated social gropus may be simply explained by the fact that
-  extremists are more stubborn than centrists---however existing data on the
-  subject is unavailable and behavioral studies on the subject may
-  contain ubiquitous false detections of rising extremism. 
+  extremists are more stubborn than centrists---however 
+  behavioral studies on the subject may
+  contain ubiquitous false detections of rising extremism, which I demonstrate
+  in Study 3. 
 
-  Finally, I developed
+  Finally in Study 4, I developed
   and analyzed an empirically motivated, network theoretic, agent-based model of 
   social influence at the societal level to understand how well we can 
   predict polarization based on the effects of initial conditions, network structure,
@@ -340,11 +344,16 @@ cognitive science.
 
 \chapter{Metaphorical violence in political discourse on US cable TV news}
 
-\input{Chapter2.tex}
+% \input{Chapter2.tex}
+% Needed to clean up Chapter 2 URLs which had the confusing, dreaded Mhttp
+% in front of the URL.
+\input{Chapter2Cleanup.tex}
 
 \chapter{Stubborn extremism explains and predicts group polarization}
 
-\input{Chapter3.tex}
+% \input{Chapter3.tex}
+% Necessary because I am editing Chapter 3 to be a journal article.
+\input{Chapter3Final.tex}
 
 \chapter{Most group polarization results may be simple conformity}
 

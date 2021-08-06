@@ -1,0 +1,726 @@
+
+Group polarization is the widely-observed phenomenon in which the opinions held by members of a small group become more extreme after the group discusses a topic. 
+For example, conservative individuals become even more conservative, while liberal individuals become even more liberal. 
+Social psychologists have offered competing explanations for this phenomenon. These typically require questionable assumptions about human psychology. 
+Here, we posit a more parsimonious explanation: the stubbornness of extreme opinions. Using agent-based modeling, we demonstrate that such ``stubborn extremism'' 
+gives rise to group polarization as observed across the literature on 
+polarization.  We conclude with an evaluation of stubborn 
+extremism and existing explanations
+to identify opportunities for theoretical integration. 
+
+% \textbf{Keywords:} 
+% opinion dynamics; polarization; social influence; agent-based modeling
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+\emph{Group polarization} is a phenomenon in which 
+the opinions held by members of a small group become more extreme after the group 
+discusses a topic \cite{Myers1982,Brown1986,Isenberg1986,Sunstein2002,Sieber2019}.
+This phenomenon is socially important for many reasons. First, 
+small groups of advisers often influence executive decisions in government and business. 
+At the ``grass roots'' level in politics, individuals discuss 
+important issues first in small groups before they vote. 
+Second, group polarization at the local level increases overall polarization at the societal level. Polarization, measured as the bimodality of the distribution of
+opinions in a group or society, increases whenever either of two opposed 
+groups becomes more extreme~\cite{Bramson2016}. 
+Many studies of political polarization frame the issue in terms of intergroup 
+conflict~\cite{Mason2018UncivilAgreementBook,Klein2020}. 
+However, we also must understand how
+group polarization can exacerbate political polarization through increased
+in-group extremism without an explicit out-group. 
+Understanding the cognitive mechanisms supporting group 
+polarization is therefore a matter of concern. 
+
+Social psychologists have offered several explanations for group polarization, 
+but four are considered acceptable today~\cite{Sieber2019}. 
+First, \emph{social comparison theory} posits that individuals' privately-held 
+opinions tend be more extreme than those they express publicly, and exposure to consonant 
+opinions gives them confidence to express their true opinions openly~\cite{Myers1982}. 
+It is not clear, however, when or if people really do hold more extreme views
+than they tend to express.
+%In contrast, 
+Second, \emph{persuasive arguments theory} posits that when individuals discuss a topic within an already-biased group, 
+they accumulate more persuasive arguments supporting those biases, leading to a more extreme version~\cite{Bishop1974,Vinokur1974}. 
+This is problematic because it lacks inclusion of arguments for moderation, explaining that
+moderation comes from knowing arguments for each polar opinion.
+Third, \emph{self-categorizaztion theory} explains group polarization as emerging from
+the desire of individuals to consolidate group membership by expressing more
+extreme opinions, which further contrasts individuals from hypothetical out-groups~\cite{Turner1987,Abrams1990,McGarty1992}.
+This is problematic because it is not clear how the calculation works that
+would determine how much one individual should shift their opinions to more clearly
+signal group membership.
+Finally, \emph{social decision schemes theory} explains group polarization as the 
+result of two main factors, namely the distribution of individual-level traits
+that determine individual opinions and the method by which groups make collective decisions~\cite{Zuber1992,Friedkin1999a}.
+If extremists are more powerful in groups on average, then group decisions
+on collective opinions will become more extreme after group deliberation.
+This is problematic because it may be difficult to determine a novel group's
+decision scheme \emph{a priori}.
+These explanations may explain the empirical phenomenon of group polarization, 
+though more formal modeling is required to bring precision to the underlying 
+theories~\cite{Smaldino2017StupidModels,Smaldino2019b}. 
+
+We present an alternative explanation for group polarization that, while not mutually exclusive with the other theories discussed, 
+manages to explain the phenomenon of group polarization without assuming anything about the intrinsic distribution of extreme opinions in human groups. 
+This is important because the extant theories of group polarization outlined above 
+make auxiliary assumptions that add needless complexity and are perhaps not well supported.
+We demonstrate that group polarization emerges when we assume the psychological
+property of \emph{stubborn extremism}: as a person's opinion on
+some topic becomes more extreme, that opinion also becomes more stubborn, 
+i.e.\, less susceptible to social influence. 
+We support this explanation using a computational model of group polarization. 
+Our model was originally developed for explaining how polarization emerges
+where two groups become more extremely opposed~\cite{Flache2011,Turner2018}.
+The model incorporates both negative, repulsive social influence~\cite{Cikara2014}, assimilative influence,
+and the stubborn extremism assumption, though repulsive influence is not at work
+in group polarization because all opinions start out similarly valenced.   
+
+Theories can be thought of as one or a few central assumptions, or hypotheses
+to be supported, conjoined with
+auxiliary assumptions about how a phenomenon of interest emerges (group polarization
+being our phenomoenon of interest). Together all these assumptions form the antecedent in a logical implication,
+with the phenomenon of interest as the consequent.
+Parsimony is a useful measure of how many central or
+auxiliary assumptions a theory makes---more parsimonious theories explain the same 
+empirical observations (group polarization here) with fewer assumptions. 
+More parsimonious theories are generally preferred because they are easier to 
+interpret.  
+One reason more parsimonious theories are often preferred are because they are
+easier to interpret. 
+
+We use computational modeling to simulate social behavior that leads to
+group polarization under a set of empirically motivated assumptions, 
+including the stubborn extremism assumption. 
+Such modeling enables us to build a simulated world where group polarization is not assumed, only
+a small set of basic psychological mechanisms. In this way, our computational 
+model is a mechanistic model provides a concrete system that encapsulates
+a theory's assumptions that make up the antecedent of our scientific proposition.
+We use this approach to demonstrate that the relatively minimal assumptions
+of stubborn extremism, along with a few other context-independent cognitive
+factors, can lead to the emergence of group polarization in computer simulations.
+
+% (THIS IS REPEAT BELOW, OLD FROM COG SCI PAPER. NEED TO COMBINE AND SMOOTH OUT 
+% WITH NEW STUFF ABOUT SCIENTIFIC INFERENCE)
+Group polarization can emerge computationally by simply 
+assuming agents hold binary opinions on a multitude of topics~\cite{Mueller2018,Banisch2019}. 
+However, most group polarization studies do not measure participants' binary opinions (e.g., for vs.\ opposed) on a multitude of topics, but rather measure opinions as falling on a range between strongly for and strongly opposed. Furthermore, the assumption of discrete opinions is problematic from a psychological perspective,
+since it is rare for quantum leaps in opinion to occur---more often we are
+influenced gradually over the course of many interactions~\cite[p.793]{Baldassarri2007}.
+Our model is most similar to that of \citeA{Baldassarri2007} in that stubbornness is 
+a function of opinion extremity directly. \citeA{Martins2013} allow for agents
+to become more or less stubborn, but assume discrete opinions and a separate,
+continuous measure of open-mindedness/stubbornness.
+Most other opinion dynamics models that link 
+stubbornness to extremism assume infinitely stubborn
+extreme agents (sometimes called ``zealots'') whose opinions are static and whose existence is specified
+\emph{a priori} by the modeler~\cite{Galam2007,Mobilia2007,Arendt2015,Mueller2018}.
+\citeA{Baldassarri2007} nearly make the connection between stubborn extremism
+and group polarization, but they mischaracterize group polarization and discuss it in terms of negative influence, writing
+``interaction with dissimilar others may increase distance, leading to group
+polarization'' (p. 792). Group polarization experiments are designed so that
+this never occurs. Instead, it is only interaction among relatively like-minded
+individuals that leads to the group polarization opinion shift.
+
+
+Current empirical support for the stubborn extremism explanation is positive, though not uniformly so.
+\citeA{Zaller1992} and \citeA{Converse1964} established that, at least at the time of their studies, most of the United States electorate, for example, were relatively ignorant of real political issues
+and easily swayed by momentary predilections and the framing of questions. \citeA{Guazzini2015} found that stubborn extremists drove the opinions in groups discussing the use of animals in laboratory experiments, and 
+\citeA{Lewandowsky2019} found that stubborn extremists have an
+outsized influence in the perpetuation of scientific misinformation 
+regarding climate change. 
+%ps: This paragraph below seems disconnected from what is described above, and ends with something that is perhaps better suited for the Discussion (proposing future research on political group polarization). Perhaps these should simply be put in the Introduction where the Lewandowsky experiment is discussed? 
+Group polarization opinion shifts have been observed to increase with the group's initial 
+extremity~\cite{Teger1967,Myers1972,Myers1982,Brown1986}. This has only been
+tested in detail by \citeA{Teger1967} and \citeA{Myers1972}, apparently, and
+has not been established for political opinions. This 
+could cause acceleration of political polarization.  
+Some researchers have suggested that stubbornness is an attribute found generally among people, and is not limited to those with extreme opinions. However, support for this view often comes from studies in which opinions are operationalized as answers to general knowledge tests (such as found in a pub quiz), and not on opinions with political or ethical components in which subjective judgment plays a larger role~ \cite{Moussaid2013,Chacoma2015}. More direct empirical tests of the stubborn extremism explanation for group polarization are needed. 
+
+The rest of the paper is organized as follows. We first review evidence and explanations
+for group polarization in more detail. We will then introduce an agent-based model of opinion dynamics with stubborn extremists, which is adapted from previous work by Flache and Macy (2011), and we will demonstrate how the model supports the stubborn extremism hypothesis. We will then compare our model to the persuasive arguments model of \citeA{Mas2013}, and show how our model can yield a fit to the empirical dataset they test that is at least as congruent. We conclude with limitations of our model's assumptions, and suggestions for future work. 
+
+
+\section{Group polarization theory, methods, and results}
+
+Initially, the group polarization effect was thought only to apply to opinions about how much
+risk would be appropriate to take given some life 
+decision~\cite{Wallach1965,Teger1967,Stoner1968}---the so-called ``risky shift''. 
+\citeA{Moscovici1969} then showed that deliberation about political opinions also led to group 
+polarization. Motivated by this and by Cartwright's critiques~\cite{Cartwright1971,Cartwright1973},
+new explanatory mechanisms were proposed. The two explanations that survived to today 
+are the social comparisons theory~\cite{Brown1974,Sanders1977,Myers1978} 
+and persuasive arguments theory~\cite{Burnstein1973,Vinokur1974,Burnstein1975}. 
+Around the time of Isenberg's
+(1986) review, a self-categorization explanation~\cite{Turner1987} of
+group polarization was developed and supported with new empirical 
+studies~\cite{Turner1989,Abrams1990,Hogg1990,McGarty1992,Krizan2007}. 
+Following the development of social comparisons, persuasive arguments, and
+self-categorization theories, 
+social decisions scheme theory that identifies social power structures
+as a dominant factor in the emergence of group polarization~\cite{Zuber1992,Friedkin1999a}. 
+More recently, focus on the correlation between stubbornness and extremism has emerged as
+a simple, empirically-motivated explanation of group 
+polarization~\cite{Mueller2018,Banisch2019}. However, existing studies do not
+allow extremism to emerge naturally, but instead posit the problematic existence of
+infinitely stubborn extremists who are totally unsusceptible to social influence.
+Because it is unlikely that anyone is totally unsusceptible to social influence,
+we allow individuals to become more stubborn as they become more extreme.
+
+In this present study we create a model group polarization experiment with the
+goal of demonstrating the explanatory power of the stubborn extremism explanation.
+We believe that this explanation is more parsimonious in that it makes fewer,
+simpler assumptions about human behavior while accounting for both group
+polarization itself and the empirical observation that the group polarization
+opinion shift increases with initial group extremism. In order to understand
+the model and computational analysis it is necessary to first identify 
+common experimental design elements in group polarization studies. Second,
+it is necessary to understand in more detail how stubborn extremism explains
+group polarization and how it relates to other theoretical explanations of
+group polarization. These topics are reviewed in the remainder of this section.
+
+\subsection{Common experimental design elements}
+
+Group polarization studies all follow the same general experimental paradigm,
+with slight variations to test particular theoretical explanations or 
+real world situations. In this paradigm, participants first answer questionnaire
+items or somehow give their opinions or positions on some situation. Small groups
+typically of 2-6 participants are formed such that the mean opinion or position
+of group members is non-neutral, baised towards one or the other extreme of 
+the measurement scale. Group formation is sometimes based on initial participant answers to
+the questionnaire, but sometimes uses some other method such as a 
+different questionnaire \cite{Myers1970} or geographic location that is correlated with individual
+opinion~\cite{Schkade2010}. Political questionnaires are common choices.
+For example, \citeA{Moscovici1969} asked Parisian lycée students about their 
+opinions of then-president Charles de Gaulle and of American foreign policy.
+More recently, \citeA{Schkade2010} asked US residents of Colorado
+about affirmative action, same-sex civil unions, and global warming. 
+
+Many studies using questionnaires
+prompt participants to give their responses on an ordinal, Likert-type scale.
+Stoner's (1961; 1968) choice dilemma questionnaire was a 10-point ordinal
+scale, with 1 representing the most risk acceptance and 10 representing the
+least risk acceptance. When French students answered ``American economic aid
+is always used for political pressure'', they marked a whole number on
+a seven-point scale from
+-3 (strongly disagree) to +3 (strongly agree), with zero representing 
+neutral or no opinion. These scales do not always include 0 as the neutral
+point. \citeA{Schkade2010} used a ten-point scale from 1 (disagree very strongly)
+to 10 (agree very strongly). 
+
+Non-questionnaire group polarization studies have used a variety of 
+methods. In one approach, researchers simulate jury deliberations
+for an experimental design where participants give either opinions
+on whether a defendant is guilty or how much money for damages should be
+awarded~\cite{Kaplan1977,Kaplan1977a,Schkade2000,Schkade2007,Sunstein2000}\footnote{
+Schkade, et al., (2000), entitled ``Deliberating about Dollars: The Severity Shift'',
+was funded by Exxon Company, U.S.A., who have a clear interest in understanding
+what causes individuals to raise or lower the amount of damages they believe
+a responsible party should pay.}. Another approach studied group
+polarization in the context of gambling behavior in the game of 
+blackjack~\cite{Blascovich1974,Blascovich1975,Blascovich1976}, which
+found that participants demonstrated opinion shifts to be more risky merely
+when exposed to other group members' bets. 
+
+In this study, we are only interested in the effect of explanatory assumptions
+and can ignore details of the measurement schemes. Therefore, 
+we assume that we can directly observe people's opinions as we do in our
+computational models and analyses. Our model simulates the three stages
+of group polarization experiments identified above: (1) administer survey
+to participants to poll pre-deliberation opinions; (2) participants deliberate
+about their opinion in small groups; and (3) poll participants' post-deliberation
+opinions.
+
+
+\subsection{Theoretical explanations of group polarization}
+
+Below we review the four explanations or theories of group polarization 
+assumed or evaluated by the case studies we investigated for false detections. 
+We also review select empirical support for each explanation.
+The explanation of group polarization as due to the stubbornness of 
+extremists comes from empirically motivated modeling 
+projects that have yet to be verified empirically in group polarization settings.
+Therefore, we do not review that here. Future work will use the results of
+the present paper to devise more appropriate measurement and statistical 
+procedures that will help ensure the validity of future empirical studies.
+
+Following our theoretical review, we identify and explain common experimental design
+elements and statistical methods used commonly across group polarization research
+independent of theoretical aims and assumptions. Then in this section
+we review findings from these decades of research, which overwhemingly support 
+group polarization in general---each theory can boast supporting empirical
+evidence as well. This sets up the following section where
+we explain our model in mathematical detail that we will use to
+show that we should be highly skeptical of the broadly supportive evidence for group polarization. 
+
+\subsubsection{Social comparisons}
+
+When researchers began searching for an explanation of group polarization
+in response to Cartwright's (1971; 1973) critiques of the ``risky shift'' literature, 
+some adapted the extant ``theory of social comparison processes''~\cite{Festinger1954} of group-level
+social influence as an explanation. This theory assumes that when people
+interact in group settings, each individual infers what the prevailing
+social norms are, compares their own opinion to the social norm, and adjusts 
+one's own opinions or behaviors so they are more socially accepted or celebrated. 
+One testable corollary of this explanation is that no deliberation is required, \emph{per se}.
+All that is required is ``mere exposure'' to others' 
+opinions~\cite{Zajonc1968,Burgess1971,Bornstein1990,Montoya2017}. Several studies
+have shown that when a group polarization experiment is run as explained above,
+but without group deliberation, non-verbal displays of individual opinions 
+to the group is alone sufficient social influence to foster group 
+polarization~\cite{Teger1967,Blascovich1973,Blascovich1975,Blascovich1976,Sanders1977,Myers1978,Myers1982}.
+
+Just because mere exposure to others' opinions tends to lead to group polarization
+does not necessarily support all auxiliary assumptions made by the
+social comparisons explanation~\cite{Meehl1990}. It is not clear what the
+mechanism is by which individuals infer the group norm if it is not just the
+average. How is it, exactly, that individuals infer this more extreme than
+average group norm? \citeA{Festinger1954} assumes first that ``there is a 
+universal human drive to evaluate our opinions and abilities'' \cite[p. 78]{Brown2000}.
+But how ubiquitous is this drive to distinguish oneself through conformity?
+Clearly individuals vary in their drive to conform to social norms in general---how
+does this affect group polarization opinion shifts?
+Furthermore, achieving distinctiveness through conformity may have counterintuitive
+effects~\cite{Smaldino2015a}. Social comparisons theory fails to make contact
+with extensive literature on norms and norm change, which should be accounted
+for~\cite{Bicchieri2006,Bicchieri2014,Bicchieri2017}.
+
+These are important questions to answer. Perhaps social comparisons offers a
+good starting point for a partial explanation of group polarization, but 
+its epistemological status is shaky. It is therefore important that we
+understand how to properly measure opinion shifts to either support,
+refute, or revise and incorporate the social comparisons account into a 
+broader explanatory model of group polarization.
+
+\subsubsection{Persuasive arguments}
+
+Persuasive arguments theory explains that opinion change is determined by the number and persuasiveness of 
+arguments that support different poles of the opinion scale. Arguments, then,
+are central theoretical entities in this model alongside opinions. If there are more
+arguments favoring one polar opinion (disagree/agree) over another~\cite{Ebbesen1974}, or if
+arguments that exist for one polar opinion are more persuasive 
+then the group will collectively move towards that 
+polar opinion~\cite{Vinokur1974,Burnstein1977}. This theory assumes that for an argument to have an effect
+on a participant, that participants must not have heard the argument 
+before~\cite[see Equation on p. 96]{Bishop1974}. Furthermore, the validity,
+or informativeness, is hypothesized to be the primary auxiliary factor in 
+determining the magnitude of influence for a given argument~\cite{Vinokur1978}. 
+
+One problem with the persuasive arguments explanation is that only arguments 
+are persuasive, not people. Perhaps, for example, there is a simple 
+consistency in that more extreme individuals tend to be more persuasive than moderates, 
+perhaps due to their confidence in their opinions. This assumption would actually 
+explain observations made by \citeA{Burnstein1973} who 
+found that insincere arguments are not influential.
+Another related problem is underspecified
+psycholinguistic mechanisms of social influence. Perhaps novelty and 
+informativeness are two important factors in what makes an argument persuasive.
+Surely, though, there are other factors.  
+
+\subsubsection{Self-categorization}
+
+The self-categorization explanation of group polarization 
+posits that people conform to others' attitudes,
+opinions, or beliefs, by considering how best to ``contrast'' themselves
+with members of an out-group so as to consolidate their membership with
+an in-group~\cite{Tajfel1971,Tajfel1979,Turner1987}. 
+Experiments testing the self-categorization hypothesis use 
+the minimal group paradigm approach to
+understand differences in social influence (that leads to extremism) 
+between in-group members versus out-group members. 
+In one interesting counter-example to
+the persuasive arguments theory, the basic experimental design was used, but
+participants did not interact with a group---instead they were listened to 
+tape recordings of arguments for or against some statement. Participants
+were told they would either be joining the group or that they were listening
+to members of an out-group. This changed whether opinion shifts were to a greater
+extreme they were already bised towards (in-group) or if participant 
+opinions tended to shift away from their initial bias (out-group)~\cite{McGarty1992}. 
+Persuasive arguments theory does not account
+for group membership, so it could not have predicted this result. 
+The minimal group approach continues
+to be applied today across cognitive sciences, especially in understanding
+the neuroscience of emotions towards novel in- and 
+out-groups~\cite{Cikara2014,Molenberghs2014}.
+
+To explain
+group polarization, where there no explicit out-group, self-categorization
+theorists proposed that people engaging in social interaction mentally
+calculate the ``metacontrast ratio'', which is defined as a person's average
+distance in opinion space from all out-group members divided by that person's
+average opinion distance from all in-group members~\cite[p. 3]{McGarty1992}.
+This requires them to infer their average distance to the imagined outgroup.
+A person is then hypothesized to update their opinions to match the prototypical
+opinion, which is defined as ``the pre-test mean where the mean is at the mid-point
+of the comparative context\ldots.'' This supposedly leads to group polarization, since
+``(a)s in-group responses shift\ldots towards a more extreme position, 
+then it becomes more likely that the prototype will tend to be more extreme than
+the mean in the same direction'' (p. 4, \emph{ibid}). 
+
+While neuroscientific studies implementing the minimal group paradigm support
+the assumption that differential social influence depends 
+on whether an individual interacts
+with in-group or out-group members~\cite{Cikara2014}, it is not clear that it operates
+as hypothesized in self-categorization explanations of group polarization. 
+Specifically, the assumption
+that people calculate meta-contrast ratios and hypothetical in-group
+prototype opinions does not seem to be empirically supported. 
+It is not clear to us how such a claim could be empirically supported. 
+Another possible critique is that this reasoning seems to be circular: the 
+in-group prototype begins as the pre-deliberation
+mean, but changes once opinions begin to change. This seems to sidestep the
+problem of how opinions change in the first place and why the average opinion
+tends to become more extreme. Finally, it seems that perhaps ``prototype'' in
+the self-categorization explanation is homologous in form and function to
+a ``norm'' in social comparisons theory. Future work should explore this connection
+in more detail to understand exactly how the two theories substantively differ.
+
+
+\subsubsection{Social decision schemes}
+
+Social decision schemes generally considers the social structure of groups to
+account to determine what opinions or behaviors group members will 
+take in the course of group interaction~\cite{Davis1973}. In the main branch
+of social decision schemes, individual-level interaction strategies are 
+hypothesized and specified. To understand social decision schemes, 
+consider the following example adapted from 
+\citeA[p. 195]{Brown2000}. Assume a group is trying to solve some problem.
+The group may be composed of three types of people: 
+(1) people who are able to solve the problem, (2) people
+who can recognize a solution but not solve the problem themeselves, and
+(3) people who cannot solve the problem or recognize a correct solution.
+The group may adopt different decision rules, such as ``Truth wins'' 
+(as long as one member has the solution, the group solves the problem),
+``Majority rule'' (a majority of group members must know or recognize the
+solution), or ``Unanimous'' (all group members must know or recognize the solution).
+If we know the composition of the group in terms of these three types, then
+we can calculate the probability that a group solves the problem. 
+According to the social decision schemes
+framework, if we observe how often a group solves a
+problem and we know the distribution of strategies, we can infer the
+decision rule used by the group.
+
+In the context of group polarization, instead of recognizing solutions to
+problems, people are assumed to adopt a strategy of ``risk wins'',
+``conservatism wins'', or ``majority wins'' in the context of the
+choice dilemma questionnaire \cite{Laughlin1982,Zuber1992}. 
+\citeA{Friedkin1999a} developed a network theoretic model that aligned with the
+social decision schemes approach, but focused on power structures that 
+determine relative social influence. When extremists are more powerful, one
+would expect group polarization to emerge. 
+Friedkin ran behavioral experiments to support his explanation, but
+unfortunately, several of Friedkin's results are \emph{prima facie} 
+null, since several of the confidence intervals around the opinion
+shift measurements include zero. 
+
+One issue with the social decision schemes approach seems to be that the
+emergence of distribution of strategies, and the strategies themselves, is
+not accounted for. How does such a norm as ``risk wins'' emerge? How is this
+not a ``norm'' or ``prototype'' as could be found in either the social comparisons
+or self-categorization explanations, respectively? Because norms may indeed be
+important for group polarization, future theorizing should consider
+how norms emerge and culturally 
+evolve~\cite{Bicchieri2006,Bicchieri2014,Bicchieri2017}.
+
+
+\section{The model}
+
+We developed an agent-based model to demonstrate the stubborn extremism model
+predicts group polarization patterns reviewed above. Our goal is to demonstrate
+that the relatively minimal assumption of stubborn extremism can predict
+observed patterns group polarization opinion shifts.
+This model allows for both positive
+and negative influence, wherein initially similar agents become more similar 
+after interacting, while initially dissimilar agents become more polarized. 
+The model is identical to that studied previously in~\citeA{Flache2011} 
+and \citeA{Turner2018}, but is analyzed here with a different focus than 
+was used in those studies. 
+
+We consider a population of $N$ agents, who each have opinions
+on one topic. This model can account for social influence across multiple
+opinion topics, but one suffices for our purposes. Future work could consider
+the effect of deliberation on multiple opinions, which has been shown to foster
+cultural fragmentation~\cite{DellaPosta2015}. Agent $i$'s opinion at time
+$t$ is written $o_{i,t} \in (-1, 1)$ and changes after $i$ has interacted with its
+$N_i$ network neighbors. The weight of social influence with each neighbor $j$  is $w_{ij,t}$, 
+with zero direct influence over non-neighbors. Weights 
+depend on the Manhattan distance between agents $i$ and $j$: $d_{ij,t} = |o_{i,t} - o_{j,t}|$. 
+The specific operation of these social influence 
+mechanisms is defined by the following dynamical equation
+\begin{equation}
+  o_{i,t} = o_{i,t-1} + \Delta o_{i,t}(1 - |o_{i,t-1}|^{\alpha})
+  \label{eq:basicDynamics}
+\end{equation}
+\noindent
+where
+\begin{equation}
+  \Delta o_{i,t} = 
+    \frac{1}{2N_i} \sum_{j} w_{ij,t} (o_{j,t} - o_{i,t})
+\end{equation}
+\noindent
+and
+\begin{equation}
+  w_{ij,t} = 1 - d_{ij,t}.
+\end{equation}
+Our model includes both positive and negative influence. 
+Positive influence is when agents become increasingly similar to their dyad partner 
+if the pair are sufficiently similar to begin with ($d_{ij} < 1$). Negative influence
+is when interaction causes a dyad to become more different, to be
+repulsed away from one another toward more extreme regions of opinion space
+if the pair are sufficiently dissimilar to begin with ($d_{ij} > 1$). 
+This is important for group polarzation because while a group overall may
+be biased towards one extreme, in general there may be group members who lean
+towards the opposite opinion pole---in these situations sometimes dyads become
+more different when they interact instead of more similar~\cite{Bail2018}.
+The parameter $\alpha$ determines the degree to which extreme opinions are stubborn. 
+In the analyses presented here, we use $\alpha=1$.
+Stubborn extremism emerges in our model due to the 
+smoothing factor $(1 - |o_{i,t-1}|)$, which is smaller when $|o_{i,t-1}|$ is 
+larger. Therefore, more extreme opinions (larger
+$|o_{i,t-1}|$) are less susceptible to social influence than less extreme opinions 
+(smaller $|o_{i,t-1}|$).
+
+Our model generates a number of empirically-observed outcomes. 
+First, we show that our model 
+yields group polarization in an idealized generic case that 
+resembles the studies of  \citeA{Moscovici1969}, \citeA{Myers1970}, and \citeA{Myers1975}.  For our computational experiments, we set the number of agents in the 
+population to $N=25$\footnote{This is much larger than real group polarization experiments, but
+served to generate group polarization shifts in a shorter number of time steps
+for a proof of concept. This will need to be made realistic for the journal article.}. 
+The social network for this first experiment was fully connected, meaning all agents could 
+potentially influence all other agents. Second, we represent the \citeA{Mas2013} 
+empirical experiment with our model and show our model predicts their 
+empirical observations as accurately as their computational model of 
+persuasive arguments theory.
+
+
+\subsection{Computational experiments}
+
+Our first experiment examined the correlation between initial mean opinion 
+and shift magnitude. This also establishes that our model
+generates group polarization. 
+Initial agent opinions were drawn from a normal distribution 
+with $\sigma=0.25$. In order to demonstrate that our model predicts the correlation
+between opinion shift and initial opinion extremity, we ran the model with
+seven different experimental conditions. Each of the seven conditions 
+specified a different mean for the normal distribution from which initial opinions were drawn,
+$\mu \in \{0.2, 0.3, \ldots, 0.8\}$. For each condition we ran 100 trials. %MT: prob needs a rewrite.
+%ps: Not sure how to interpret this method above. Were opinions drawn from one of these 4 distributions at random?
+Since opinions are bounded between $\pm1$ and group polarization experiments
+force group members to have opinions of the same valence,
+we re-mapped any drawn opinions greater than 1 to be $+1$ if
+the drawn opinion was greater than 1, and 0 if the drawn value was less than 0.
+Each model run consisted of 100 rounds of agent interactions. 
+In one round of agent interaction, $N$ agents are
+selected at random to update their opinions according to 
+Equation~\ref{eq:basicDynamics}. To model a typical group polarization experiment
+with open discussion, we assume a fully-connected network, so all agents
+influence one another.
+
+
+% \subsubsection*{Flache and Macy model for Mäs and Flache's (2013) study}
+Our second experiment was designed to 
+generate the results of \citeA{Mas2013}. Here we utilized the multidimensionality of 
+opinions to represent different ``persuasive arguments'' that participants held.
+To do this, we set $K=12$, the total number of persuasive arguments available
+to each agent in M\"{a}s and Flache's study, and initialized three of the twelve
+opinions to be non-zero.  Recall that in their study, M\"{a}s and Flache provided
+individuals with one of twelve pre-defined ``arguments'' they were to share with 
+others to advocate for their opinion. Six of the twelve were chosen as pro-A arguments 
+and six of the twelve were chosen as pro-B arguments. The pro-A arguments
+were given initial values of $-1/3$ and pro-B arguments given initial
+values of $1/3$. In our adaptation of this experimental setup, we are using
+each of $K$ elements of agent $i$'s opinion vector to represent the presence
+or absence of an argument. 
+%ps: It's not clear how "arguments" are represented in this model, and how they differ from opinions.
+As in the M\"{a}s and Flache study, group ``A" members all received
+the same initial pro-B argument, and vice versa. 
+To calculate each agent's scalar opinion based on its $K=12$
+``persuasive argument'' components, we first normalize opinions so their absolute
+values sum to 1, and then averaged over all opinions. This is similar to the
+persuasive argument model that assumes an individual's opinion is an aggregate
+of the arguments they know for their position. 
+This computational experiment mirrors M\"{a}s and Flache's persuasive arguments model, 
+but includes stubborn extremism. Furthermore, in our formulation, agents can 
+partially agree or disagree
+with a given argument, unlike persuasive arguments which assumes an agent either
+knows an argument or not.
+For our computational experiment's outcome measure, we calculated the 
+average over all agent opinions in each group at each timestep, and then
+averaged those averages across 100 trials at each timestep, identical to
+M\"{a}s and Flache's procedure for obtaining their results (Figures 5 and 6 of their paper).
+
+\subsection{Implementation}
+
+The model was implemented as an agent-based model written in plain Python with 
+user-defined \texttt{Agent}, \texttt{Model}, and \texttt{Experiment} classes.
+We use NumPy and SciPy for numerical and scientific routines and functions.
+For full implementation details including instructions for installing and
+running model code and reproducing our results, please visit the GitHub
+repository, \url{https://github.com/mt-digital/group-polarization}.
+Our computational experiments easily run on a laptop. 
+
+
+\section{Analysis}
+
+Our model predicts that more extreme initial group opinion
+results in larger shifts up to a certain extremity where the trend 
+reverses (Figure~\ref{fig:shiftVsInitial}). 
+In terms of stubborn extremism, this general trend is expected 
+because there will be more extremists when the initial mean is greater. These
+initial extremists exert a greater pull towards extremism when they are more
+numerous. However, when many agents are extreme and there are few neutral agents
+to be shifted to more extreme views, the shift begins to decrease in magnitude
+compared to the maximum shift over initial mean 
+(occurs at initial mean of 0.8 in Figure~\ref{fig:shiftVsInitial}).
+
+\begin{figure}[t] %[h]
+  \centering
+  % \begin{subfigure}{0.5\textwidth}
+    % \centering
+    \includegraphics[width=\textwidth]{/Users/mt/workspace/Papers/stubex/Figures/ContinuousBoxplot.pdf}
+    \caption{Group opinion shift when individuals' initial and final 
+      opinions are given on a continuous scale.}
+    % \label{fig:continuousVsInitialAverage}
+  % \end{subfigure}
+  % \begin{subfigure}{0.5\textwidth}
+  %   \centering
+  %   \includegraphics[width=\textwidth]{/Users/mt/workspace/Papers/stubex/Figures/7pointLikertBoxplot.pdf}
+  %   \caption{Group opinion shift when individuals' initial and final opinions
+  %     are given on a 7-point Likert scale.}
+  %   \label{fig:binnedVsInitialAverage}
+  % \end{subfigure}
+  \caption{Demonstration of the trend that opinion shift is positively
+  correlated with the mean initial group opinion. The trend is distored
+  by binning into Likert scale responses. 
+  Boxes enclose the first and third quartile of the data. 100 trials shown
+  for each condition.}
+  \label{fig:shiftVsInitial}
+\end{figure}
+
+%ps: Just focus on YOUR results. Don't confuse them with the empirical studies done by others. Once you report the result, you can say something like "..., consistent with the empirical results of Myers (1975)." 
+% Binning disrupts the 
+% positive linear relationship between opinion shift and initial mean group 
+% opinion (Figure~\ref{fig:binnedVsInitialAverage}). This is because, in our
+% model, if enough agents are neutral and not too many agents are extreme, 
+% then some agents with an opinion of +3 will shift to +2, and enough agents 
+% with opinions of +1 or less do not shift their opinions, the sign of the
+% shift may be negative, and group polarization will not emerge.
+
+Our model predicts group polarization as
+observed by \citeA{Mas2013}, but via the assumption 
+of stubborn extremists instead of persuasive arguments. 
+Our model predicts the same initial increase in the extremity
+of the average group opinion for both A- and B-Type agents as predicted and
+observed in \citeA{Mas2013}. Then when A-Types and B-Types interact with one
+another, our model predicts consensus emerges, 
+as was observed by M\"{a}s and Flache's experiments and predicted by their 
+model (Figure~\ref{fig:MasFlacheComparison} above; compare with Figure 6 \citeA{Mas2013}). 
+Note that, in our model, no explicit persuasive
+arguments are exchanged. Instead, each argument is represented as an opinion
+on a certain cultural topic. Influence occurs on all cultural topics, and
+similar group members draw one another closer in hypothetical 
+12-dimensional opinion space through attractive social influence
+and stubborn extremism, resulting in group polarization.
+
+\begin{figure} %[t]  %[H]
+    \centering
+    \noautomath
+  \includegraphics[width=0.885\textwidth]{/Users/mt/workspace/Papers/stubex/Figures/MeanOpinionVsTime_MF2013.pdf}
+  \caption{Our model's prediction of group opinions in the M\"{a}s and Flache (2013) study. 
+  Within-group interactions are rounds 1-3, intergroup interactions are rounds 4-7.}
+  \label{fig:MasFlacheComparison}
+  \vspace{-1em}
+\end{figure}
+
+
+
+
+\section{Discussion}
+%Summarize and discuss the results in terms of explaining group polarization. Remember also that there were two alternate explanations presented: persuasive arguments and social comparison. Talk about these again. At minimum, the stubborn extremism is a competing explanation. It also seems more congruent with the available cognitive science on beliefs and social influence. Discuss limitations and the importance of understanding more about the cognitive processes involved in the maintenance and update of opinions. 
+
+We have shown that stubborn extremists are a feasible explanation for group
+polarization. Our model that incorporates this simple mechanism predicts
+behavior observed in a number of empirical studies. These empirical studies have
+often considered two alternative pathways to group polarization: 
+\emph{persuasive arguments} and \emph{social comparisons}. The persuasive
+argument theory explains that group polarization occurs because individuals
+are exposed to more arguments supporting their initial position in contrast with the opposing opinions, thereby strengthening that opinion. 
+At the group level, this leads the average opinion to shift towards
+an extreme. Alternatively, social comparison theory posits that group 
+polarization is due to group members calculating some optimal opinion to express publicly that takes into account both their private opinion and the perceived social consequences of expressing that opinion. The theory posits that, following group discussion, this optimal public opinion is usually judged to be more extreme than individuals' initially stated opinions.
+
+First, to address persuasive arguments theory, 
+it certainly matters what language and communication strategies are used.  % (\cite{Hart2005,Druckman2007,Kalmoe2014,Flusberg2017,Kalmoe2018}). 
+Linguistic frames modulate the perceived meanings of words and sentences~\cite{Fillmore1982,Chong2007,Cacciatore2016}.
+These frames often become norms that are shared, repeated, and 
+modified by group members.
+In this process linguistic frames co-evolve with the meanings of words~\cite{Hamilton2016,Garg2018,Hawkins2020}.
+Metaphorical framing provides a particularly strong example of how language can
+lead to extremism. \citeA{Kalmoe2014,Kalmoe2018} found that using violence
+metaphors to describe political issues and events (e.g., ``EPA regulation
+is \emph{strangling} the economy'') led participants to increase their support
+for real world violence to reach political goals---this effect was even more
+pronounced among the most trait aggressive participants.
+
+Self-categorization theory is correct to assume that it is a fundamental human capacity 
+to evaluate one's own and others' group membership status~\cite{Cikara2014,Cikara2017}. 
+The desire to clearly belong
+to one's in-group may well motivate individuals to increase their extremism 
+in such a way as to lead to more clear signals of group membership, whether that is
+from being drawn towards the direction others are tending, or to be more
+clearly different from a perceived out-group.
+Whether this is achieved through a calculation of the 
+hypothesized ``meta-contrast ratio''~\cite{Turner1987} is less clear.
+Using the meta-contrast ratio as a theoretical variable
+calculated in the brain lacks the sort of mechanical explanation of behavior
+as Bayesian cognitive models. To ensure the validity of the meta-contrast ratio,
+or any other theoretical psychological calculation, one must co-develop a 
+mechanistic model of how the value is calculated~\cite{Jones2011}, which does
+not seem to be developed in self-categorization explanations of group polarization.
+
+Social decision schemes models of group polarization posit that there exist
+individual-level decision making traits (e.g., the ability to find or identify
+a solution to some problem) and group-level decision making schemes (e.g.,
+the group must unanimously vote to choose an opinion or behavior)~\cite{Brown2000}. 
+Power dynamics are an important component for determining the 
+social decision scheme used by a group~\cite{Friedkin1999a}.
+If it is the case that that one can enumerate individual-level traits and group-level
+decision schemes and power structures, then the social decision scheme model 
+can theoretically be used to predict group decisions, opinions, and 
+resulting behavior~\cite{Zuber1992,Friedkin1999a}. If the social decision
+scheme model encodes or evolves extremists to be more powerful, then group
+polarization will emerge. If extremists dominate the conversation, which seems
+like it may plausibly occur often, then group polarization will emerge.
+One issue here is the introduction of the social decision scheme construct, 
+which itself would be subject to cultural evolutionary pressures depending
+on group constitution and estimated payoffs of different strategies~\cite{King-Casas2005}. 
+The idea of payoffs in a group polarization context is potentially problematic
+as well since there is no tangible benefit to finding consensus, becoming
+more extreme, etc. It can only be understood as emotionally beneficial.
+
+We believe that the stubborn extremism explanation of group polarization is
+a more appropriate starting point since it seems more parsimonious and
+robustly supported than alternative explanations~\cite{Kinder2017,Reiss2019,Zmigrod2019}.
+The stubborn extremism explanation makes one simple assumption, which could be
+complemented by certain elements of existing explanations outlined above.
+Even if stubborn extremism explains group polarization in some contexts, 
+it is not clear which contexts. Our work does not address this 
+important outstanding question directly. Likely it will take multiple methods
+and approaches to understanding the subtleties of the effect of context
+on group polarization. Although there is evidence supporting the hypothesis that extreme opinions are more stubbornly held, 
+we are aware of no research specifically investigating the relationship between stubbornly held opinions and group polarization.
+Future empirical work should evaluate the stubborn extremism 
+hypothesis using a statistical model to detect correlation between 
+opinion extremity and stubbornness. 
+
+Models of opinion dynamics should be able 
+to explain a number of empirical phenomena, including but not limited to group polarization. 
+Another program of future work, then, could be to perform similar
+computational experiments shown here using alternative, 
+influential models of political polarization,
+such as Bayesian/information-theoretic models (e.g.~\citeA{Dixit2007}) or 
+algorithmic models (e.g.~\citeA{Dandekar2013}).
+    
+

@@ -59,7 +59,7 @@ more generally~\cite{Iyengar2019}, even making violent responses to verbal
 communication more likely~\cite{Kalmoe2014,Kalmoe2018,Mason2018UncivilAgreementBook}.
 Why do extremism and polarization increase and decrease over time in different contexts? 
 This simple question yields no simple answers. These questions
-have been studied for some decades now by researchers across perhaps a dozen
+have been studied scientifically for some decades now by researchers across perhaps a dozen
 diverse disciplines and sub-disciplines including 
 political science~\cite{Mason2018UncivilAgreementBook,Boxell2020}, 
 sociology~\cite{Baldassarri2007,Flache2011}, 
@@ -77,15 +77,15 @@ increases in extremism among ideologically similar groups over time?
 Third, and finally, what are some fundamental cognitive capacities and
 social factors that are required for polarization to occur, and what
 role do random chance and miscommunication play in the emergence of
-polarization? 
+polarization? In the course of this work, I also identified a statistical
+problem that undermines many or possibly most published results on rising
+extremism among ideologically biased groups.
 
-To answer these research questions, this dissertation focuses on the communicative, cognitive,
+To answer these research questions, this dissertation studies the communicative, cognitive,
 and social factors that provide the human substrate for rising extremism
 and polarization~\cite{Jung2019,Rollwage2019}. 
-In the course of this work, I identified a statistical
-problem that undermines many or possibly most published results on rising
-extremism among ideologically biased groups, demonstrated in Study 3.
-The Studies I present in this dissertation help delineate and explore points of contact between
+
+The studies I present in this dissertation help delineate and explore points of contact between
 the various disciplinary approaches to studying polarization. As such, they
 required diverse theoretical, modeling, and computational methods, 
 including structured corpus building and analysis for studying metaphor
@@ -95,9 +95,9 @@ measurement process, and agent-based modeling of social influence processes.
 In political communication, people are differentially
 influenced depending on what language is used, even down to choice of 
 grammar~\cite{Matlock2012}. For example, if the past participle is used
-to describe a politicians bad deeds (e.g., he was imbezzling campaign
-funds) this worsens people's opinions of the politician compared to 
-communicating using the simple past tense (he imbezzled campaign funds).
+to describe a politicians bad deeds (e.g., \emph{he was imbezzling campaign
+funds}) this worsens people's opinions of the politician compared to 
+communicating using the simple past tense (\emph{he imbezzled campaign funds}).
 This dissertation focuses specifically on the choice of metaphor used 
 in political discourse, which is a powerful method for framing political 
 messages to rally political allies and identify, disparage, and target
@@ -112,8 +112,8 @@ different~\cite{Cikara2014,Bail2018};
 similar they are and more repulsive the more dissimilar they are~\cite{Lord1979,Ross2012};
 and (4) that extremists tend to be more stubborn than centrists~\cite{Reiss2019,Zmigrod2019a};
 
-Social relationships structure social interactions, determining who interacts
-with whom, which is often analyzed using social
+Social relationships structure social interactions. Social relationships
+determine who interacts with whom, which is often analyzed using social
 networks~\cite{Watts1999}. A major factor that determines an individual's social
 network is the tendency towards \emph{homophily}, summarized in the heuristic
 that ``birds of a feather flock together''~\cite{McPherson2001}. This results
@@ -123,7 +123,7 @@ societal opinion structure and dynamics when similar individuals interact more
 and more often, and dissimilar individuals sometimes come to not interact at
 all~\cite{Axelrod1997,Centola2007,DellaPosta2015}.
 
-\section{Outline}
+\section{Introduction to the dissertation studies}
 
 This dissertation's modest contributions to the expansive literature on extremism
 and polarization are in breaking down the complex social influence system of
@@ -143,8 +143,8 @@ the debates in 2016 and 2012, largely influenced by using violence metaphors
 to describe Twitter ``attacks'' (i.e.\ tweets) by one political candidate
 against the other. 
 
-In Study 2 I focus down onto a group-level process that seems
-to increase extremism among like-minded group members known as
+In Study 2 I develop a novel, parsimonious explanation of a group-level process that seems
+to increase extremism among like-minded group members, known as
 \emph{group polarization}~\cite{Brown1986,Isenberg1986,Brown2000,Sunstein2002}.
 Existing explanations of group polarization tend to rely on several auxiliary
 assumptions that may or may not be well supported, which make the explanations
@@ -152,14 +152,15 @@ difficult to evaluate~\cite{Meehl1990}. I use agent-based modeling to
 show that group polarization can
 be more parsimoniously explained by the empirically motivated assumption 
 that people become more stubborn as their opinions become more 
-extreme~\cite{Reiss2019,Zmigrod2019a}. 
+extreme~\cite{Reiss2019,Zmigrod2019a,Kinder2017}. 
 
 Unfortunately many published detections
 of group polarization are plausibly false, which I demonstrate in
-Study 3 using statistical models. False detections may occur in group polarization
+Study 3 using a statistical model. False detections may occur in group polarization
 data because researchers failed to rigorously account for floor/ceiling effects
 introduced when ordinal behavioral data (e.g. Likert scale data) is analyzed
-using metric statistical models. Metric statistical models fail to account for
+using metric statistical models (e.g.\ a $t$-test to detect differences between
+normal distributions). Metric statistical models fail to account for
 the fact that very extreme opinions can become significantly more moderate
 when measured on an ordinal scale. Therefore, metric models can be tricked into
 thinking real psychological opinions have become more extreme among a group,
@@ -177,8 +178,8 @@ social network connectivity as might emerge from interacting with dissimilar
 others over the Internet~\cite{Bail2018}, in addition to considering the effect
 of initial extremism, miscommunication, and path-dependence of social interaction
 order (i.e., who interacts with whom, and when). I found that while social network
-structure can bias society towards more or less polarization this is highly
-path-dependent; furthermore, there are critical values of initial extremism
+structure can bias society towards more or less polarization~\cite{Flache2011}, 
+this is highly path-dependent. Furthermore, there are critical values of initial extremism
 and communication noise that can override social network structure or path 
 dependence to make either high levels of polarization or full consensus 
 (i.e., no polarization) inevitable.
@@ -202,70 +203,78 @@ dangerous problem that needs to be solved.
 For example, when in 2014 the Pew Research Center found polarization
 in 2014 to be the highest in decades, journalist and Vox founder Ezra Klein 
 (2014) found the statement obvious, writing ``(E)veryone already knew that.''
-\citeA{Klein2020} later explained further ``Why we're polarized.'' 
+\citeA{Klein2020} later explained further in a book for the popular press,
+{Why we're polarized}. 
 However, whether or not polarization occurs depends on how polarization 
 is defined and the population being studied. 
 In fact, there is a debate among political scientists whether
 polarization really occurs, but this is a matter of definition~\cite{Mason2015,Lelkes2016,Kinder2017}.
 Extremism and polarization must be well defined to study them scientifically.
-In this dissertation, \emph{extremism} is defined by how extreme one's opinion is on some opinion 
-scale, which represents how intensely or confidently someone believes in their
-own opinion on some topic.  For example, giving a zero on a Likert scale often means that one 
-neither agrees or disagrees with some statement. Strong disagreement or agreement
-is indicated by indicated the largest negative or positive values on the Likert
-scale.  \emph{Polarization} in this dissertation is 
-conceptualized as the bimodality in opinions among a population, ignoring 
-whether individuals are members of political parties or not. Opinion bimodality
-can quantify ideological divergence among all members of society~\cite{Bramson2016,Lelkes2016}. 
 
 At worst, extremism and political
 polarization leads to political violence and even civil war~\cite{Epstein2013,Freeman2018}.
-This seems true no matter what definition of extremism and polarization one
-uses. However, different types of extremism and polarization may have different
+However, different types of extremism and polarization may have different
 effects on society and governance~\cite{Lelkes2016}. \citeA{Lee2015}, for example,
 found that although partisan sorting had occurred in recent decades, there
 had been little degradation in legislative and other government outcomes.
-Alternatives to measuring polarization as bimodality of opinion distributions
-start by assuming the existence of political parties and ideologies---the 
-Republican and Democratic parties, and conservative and liberal ideologies.
-Then, polarization can be measured by the degree of sorting of ideologies
-into political parties~\cite{Mason2015}.  In the United States, this means polarization is measured
-as the combined degree to which liberals are also Democrats, and to which 
-conservatives are also Republicans. Polarization is certainly on the rise,
-but this may be a correction to normal from several previous decades of 
-unnaturally low levels of political sorting~\cite{Lee2015,Wood2017b}.
-
-The rise of
-\emph{affective polarization} between political groups has been found to increase as non-political
+The rise of \emph{affective polarization} between political groups has been found to increase as non-political
 preferences align among partisans as well---for example, preferences for
 leisure activities and entertainment are becoming increasingly correlated
 with ideology and party membership in the United States~\cite{Pew2014PublicPolarization,DellaPosta2015}.
 Affective polarization includes the increasing dislike and distrust between opposing political parties, 
 which spills over into non-political areas of life~\cite{Iyengar2019}. 
-
-While I focus on extremism and polarization in the United States, similar trends and concerns can be observed 
+Polarization is certainly on the rise, but this may be a correction to normal from several previous decades of 
+unnaturally low levels of political sorting~\cite{Lee2015,Wood2017b}.
+Similar trends and concerns can be observed 
 worldwide~\cite{Borge-Holthoefer2014,Morales2015,Romenskyy2017,Zmigrod2018}. 
-We in the United States may have a particularly bad case of rising polarization: 
+We in the United States may, however, have a particularly bad case of rising polarization: 
 \citeA{Boxell2020} found that among the United States and eight other OECD countries
 the United States had the largest increase in affective polarization over the
-past four decades. Further comparative study is necessary to understand the fundamental human factors underlying
-extremism and polarization in societies that are not Western or democratic,
+past four decades. Further cross-cultural study is necessary to understand the fundamental human factors underlying
+extremism and polarization, especially societies that are not Western or democratic,
 with possibly lower standards of living~\cite{Henrich2010}.
 
-Among all the ways in which individual preferences and opinions are sorted and polarized, a
+In this dissertation I aim to identify fundamental communicative, cognitive, and
+social factors that foster extremism and polarization, with limited contextual
+details. Of course context is important, but we cannot know how important without
+first understanding baseline capacities and processes that lead to changes in
+extremism and polarization. Note that the above evidence
+for increasing extremism and polarization
+assumes the existence of political parties and ideologies---the 
+Republican and Democratic parties, and conservative and liberal ideologies.
+Polarization in these studies is measured by the degree of sorting of ideologies and preferences
+into associated political parties~\cite{Mason2015} and increasing interpersonal 
+dislike~\cite{Iyengar2019}. To understand more fundamental factors than 
+parties and ideologies, I take a more general approach that does not label 
+individual opinions, and defines increased extremism and polarization formally
+in terms of opinion distributions. In this dissertation, \emph{extremism} is 
+defined by how extreme one's opinion is on some opinion 
+scale, which represents how intensely or confidently someone believes in their
+own opinion on some topic.  For example, giving a zero on a Likert scale often means that one 
+neither agrees or disagrees with some statement. Strong disagreement or agreement
+is indicated by indicated the largest negative or positive values on the Likert
+scale. \emph{Polarization} in this dissertation is 
+conceptualized as the bimodality in opinions among a population, ignoring 
+partisanship and political or ideological identities. Opinion bimodality
+can quantify ideological divergence among all members of 
+society~\cite{Bramson2016,Lelkes2016}. 
+
+Among all the ways in which individual preferences and opinions are sorted and 
+polarized in the United States, a
 major one one that both reflects and drives rising polarization is the split in
 where partisans get their news~\cite{Pew2014PolarizationAndMediaHabits,Martin2017}. 
 What is said on cable TV news and other mass media is extremely important, given
 the reach of mass media and the way mass media frames the terms of debate~\cite{Chong2007}.
 One important communication strategy is the use of different 
 metaphors to frame different political
-messages, processes, and events. These framings influence the way politics is understood by 
-news consumers. One's opinions about immigrants, for example, may depend
+messages, processes, and events. These framings influence the way politics is 
+understood and discussed by news consumers. One's opinions about immigrants, for example, may depend
 on whether one has been exposed to metahpors that cast immigrants as 
 ``indigestible food, conquering hordes,'' or ``waste materials''~\cite{OBrien2003}.
 Those who had been exposed to such metaphors may later tend to favor stricter limits
 on immigration and harsher treatment for undocumented immigrants.
-In Study 1, I study the change in frequency over time of a 
+
+In Study 1, I quantify the change in frequency over time of a 
 specific type of metaphor use, violence metaphors, across cable news channels
 MSNBC, CNN, and Fox News, around the time of the United States presidential
 debates and elections. Violence metaphors are important because they have
@@ -279,8 +288,8 @@ Mass media frame the terms of political discourse, which spreads through
 interpersonal influence among ordinary citizens~\cite{Katz1955}. But how does 
 interpersonal social influence work, and how do we know which social 
 influence processes are essential for rising extremism and polarization to
-emerge? We break down interpersonal influence into formal computational
-models to see if polarization emerges from that model, without assuming anything
+emerge? In this dissertation I break down interpersonal influence into formal computational
+models to analyze whether polarization emerges from that model, without assuming anything
 about polarization itself. 
 
 Interpersonal influence of opinions can be broken down into
@@ -297,6 +306,7 @@ that structure who in a society interacts, when; and (2) the stochasticity
 of interpersonal influence, e.g., three people may frequent a certain bar
 and talk regularly on Fridays, but who attends varies depending on essentially
 random factors like other obligations or obstacles to attending. 
+
 In Study 2 I incorporated these cognitive and social factors into a 
 computational model, which led to the simulated emergence of 
 ``group polarization'', the empirical 
@@ -311,9 +321,10 @@ Like the field of psychology generally, understanding and predicting extremism
 and polarization requires cross-disciplinary understanding that sometimes
 involves scientists working focusing on one system component and sometimes has 
 scientists exploring the interfaces between system components~\cite{Brewer2013,Rollwage2019}.
-By assuming extremely general things about how social influence works in society, it is
+By making general assumptions about how social influence works in society, it is
 possible to encapsulate many of the dimensions along which individuals are
-separated and how social influence regarding opinions (or beliefs, attitudes, etc.) on one dimension
+separated and how social influence regarding opinions 
+(or beliefs, attitudes, etc.) on one dimension
 is correlated with social influence along other dimensions. We can add 
 details to such a general model as necessary to understand, for example, 
 how framing strategies change over time on cable TV news (Study 1) or how
@@ -353,11 +364,11 @@ politics. The outcomes of political decision are only felt indirectly in terms
 of increased or restricted liberty, or economic effects such as tax breaks or
 an improved economy.  On the other hand, either being engaged in or observing physical conflict
 results in a cascade of immediate bodily effects, including body-to-body contact and
-possibly injury for fight participants. The conceptual entailments of this
-violence metaphors include the
-fact that politics generates similar feelings to being in a fight, for example, 
+possibly injury for fight participants. The conceptual entailments of casting
+politics as violence encodes the fact that politics generates similar 
+feelings and physiological reactions to being in a fight, for example, 
 including the physical sensations of elation or depression following a political win
-or a political defeat, and the adrenaline (and other biophysical repsonses)
+or a political defeat, and the adrenaline and other biophysical repsonses
 of the fight itself~\cite{Gallese2005,David2016}.
 
 Metaphor is one of several forms of linguistic \emph{framing} that can 
@@ -378,12 +389,19 @@ Politicians and commentators have long used metaphor to motivate
 supporters and villify opponents~\cite{Charteris-Black2009}. 
 To take a current example, Fox News has
 recently been covering what they call ``Classroom Warfare'' over
-Critical Race Theory~\footnote{Humorously summarized by The Daily Show here:\url{https://www.youtube.com/watch?v=7sGK33uTOpU}}.
+Critical Race Theory~\footnote{Humorously summarized by The Daily Show here: \\
+https://www.youtube.com/watch?v=7sGK33uTOpU}.
 Anchors and commentators on Fox News variously cast anti-Critical Race Theory
 protestors as ``an army of moms and parents'' waging war ``on the front lines
-of this fight.'' To understand the purpose and effectiveness of this metaphorical framing, 
+of this fight.'' 
+War metaphors for addressing the climate crisis seem to foster a greater
+sense of urgency for finding solutions to the crisis~\cite{Flusberg2018}. 
+War metaphors have also been ubiquitous in attempts to mobilize public 
+responses to mitigate the spread of COVID-19~\cite{CastroSeixas2021}. 
+To understand the purpose and effectiveness of this metaphorical framing, 
 we have to consider the \emph{entailments} that go
-along with the \textsc{war} conceptual frame. Wars have at least two combatants---
+along with the \textsc{war} conceptual frame. Wars have at least two opposing
+belligerent groups---
 soldiers for each side are literally mortal enemies. 
 In the context of American politics and to Fox News viewers, there
 are conservatives on the Fox News side and liberals on the other side. 
@@ -394,18 +412,19 @@ outlet~\cite{Prior2013,Pew2014PolarizationAndMediaHabits,Pew2017TrumpClinton}.
 
 Beyond the partisan ``wars'' that play out in the minds of American citizens
 based on what they see on American cable news, there are many
-other political issues and events in the USA and abroad are 
-described and understood using metaphorical language. For instance, metaphors were
+other political issues and events in the USA and abroad that are 
+described and understood using metaphorical language. 
+For example, the metaphor casting Washington, D.C.,
+as a swamp has been used over the years by both liberals and conservatives 
+to cast the other side as dirty and corrupt~\cite{Burgers2019}.
+In another example, during the Gulf War of 1991, metaphors were
 used to cast Saddam Hussein as a madman and the United States as ``givers''
 of freedom to Kuaiti citizens, which was metaphorically ``taken away''
 with the Iraqi invasion~\cite{Lakoff1991}. 
 This is a metaphor since freedom
 is not a thing one can give, receive, or take away, 
 as one would give another person water or food.
-War metaphors for addressing the climate crisis seem to foster a greater
-sense of urgency for finding solutions to the crisis~\cite{Flusberg2018}. 
-War metaphors have also been ubiquitous in attempts to mobilize public 
-responses to mitigate the spread of COVID-19~\cite{CastroSeixas2021}.
+
 
 In the French and UK presses, metaphor use was observed to vary depending on the
 political context: when Obama won the 2008 US election,
@@ -416,10 +435,7 @@ when former Pakistani General and retiring President Pervez Musharaf's party
 lost in Pakistan's presidential elections, UK and French news outlets 
 called it a ``knockout'' and generally used other violent and disparaging
 metaphors against the former president, despite him not even being a 
-candidate~\cite{Burnes2011}. Similarly, the metaphor casting Washington, D.C.,
-as a swamp has been used over the years
-by both liberals and conservatives to cast the other side 
-as dirty and corrupt~\cite{Burgers2019}.
+candidate~\cite{Burnes2011}. 
 
 Empirical data from behavioral studies supports the inference
 that violence metaphors could contribute to readers and 
@@ -439,10 +455,11 @@ correlation is amplified in 2016 compared to 2012.
 
 Extremism and polarization are emergent phenomena of social systems composed
 of individuals. Human beings are the most fundamental components in the
-models of social systems I use in this dissertation. 
-But humans are complex themselves~\cite{Kello2007,Spivey2020},
+models of social systems I develop in this dissertation. 
+But humans are complex themselves,
 a composite of simpler cells properly organized to have the capacity for
-social influence of and by others, among many other capacities. 
+social influence of and by others, among many other 
+capacities~\cite{Kello2007,Spivey2020}. 
 So, how can humans be treated as fundamental?
 The modeling strategy that solves this is to assume humans 
 have only a small set of critical
@@ -455,16 +472,17 @@ the emergence of extremism and polarization are social factors, such as
 the effect of social relationship networks on emergent
 social phenomena. While communication is essential to increasing extremism and
 polarization, much can be understood about cognitive and social factors
-in polarization, indpendent of specific details about interpersonal 
+in polarization, indpendent of specific contextual details about interpersonal 
 communication.
 
 
 
 \subsection{Cognitive factors in polarization}
 
-Cognitive factors in polarization I focus on here are some essential
-individual- and dyad-level capacities and processes that
-enable social influence of one individual by others. The first essential capacity
+In this dissertation, I focus on cognitive factors in polarization I 
+focus on a set of essential individual- and dyad-level cognitive 
+capacities and processes that enable mutual social influence. 
+The first essential capacity
 is the capacity for one's opinions to become more similar to others' opinions.
 The second essential capacity is the ability to become more different from those
 with whom we disagree. Whether two individuals are attracted to or repulsed
@@ -493,8 +511,9 @@ misinformation~\cite{Zollman2007,Zollman2013,OConnor2018,OConnor2019e}.
 Often in intergroup social influence, members from different groups
 develop more different opinions over time when they interact, instead of becoming more 
 similar~\cite{Tajfel1979,Sherif1988,Flache2011,Bail2018}.
-Group membership may be determined by observable traits such as race, language,
-or style of dress, but it need not be. The ``minimal group'' experimental design has 
+Group membership may be determined by observable traits such as race, 
+sex or gender identity, language, or style of dress, but it need not be. 
+The ``minimal group'' experimental design has 
 been used to design experiments that revealed that novel group membership
 specified by experimenters can almost immediately override observable
 indicators of group membership~\cite{Tajfel1971,Billig1973,Tajfel1982}.
@@ -518,21 +537,23 @@ In politics, individuals have been observed to be more influenced by presidentia
 candidates in a debate who are perceived as similar to themselves.
 On large scales, it has been observed that food, hobby, and other
 preferences are becoming increasingly correlated with political ideologies such
-as conservativism and liberalism~\cite{DellaPosta2015}.
-\citeA{Suhay2018} found that emotions may be critical: they found that
+as conservativism and liberalism, leading to stereotypical ``latte liberals'' and
+``bird-hunting conservatives''~\cite{DellaPosta2015}.
+\citeA{Suhay2018} found that emotions may be critical in biased assimilation: they found that
 anger especially, along with other emotional states, ``fuel(ed) biased reactions
 to issue arguments'' in an online behavioral study. 
 
 The final cognitive factor in social influence I consider is that those with
 more extreme opinions tend to be more stubborn, i.e.\ less susceptible to
-social influence, than centrists. Evidence from several fields supports
+social influence, than centrists. Evidence from several disciplines supports
 this assumption. On the one hand, longitudinal survey studies
-have found that a large portion of the population are centrists demonstrating
+have found that a large portion of the population are centrists with
 low ``opinion stability over time''~\cite{Converse1964,Zaller1992,Kinder2017}. 
+Centrist opinions tend to be more susceptible to framing effects~\cite{Chong2007}
+and to question ordering~\cite{Zaller1992}. 
 Extremists in the United States and United Kingdom were observed to be 
 more cognitively inflexible than their centrist counterparts~\cite{Zmigrod2019a}.
-Centrist opinions tend to be more susceptible to framing effects~\cite{Chong2007}
-and to question ordering~\cite{Zaller1992}. Extremism has also been electrophysiologically linked
+Extremism has also been electrophysiologically linked
 to differences in responses to stimuli. In an EEG study, \citeA{Reiss2019} found that ERP
 responses to anomolies in experimental stimuli were muted among participants
 with more extreme socio-political opinions compared to centrist participants.
@@ -540,25 +561,18 @@ with more extreme socio-political opinions compared to centrist participants.
 Other approaches to studying the cognitive factors in extremism and polarization
 include analyzing the correlation between personality traits and ideological
 alignment~\cite{Rollwage2019}, and considering cognitive factors of social influence 
-in the context of exchanging information, instead of influencing opinions~\cite{Carley1990,Carley1991,Bala1998}.
+for information exchange, instead opinion influence~\cite{Carley1990,Carley1991,Bala1998}.
 In the UK, for instance, \citeA{Zmigrod2018} found that dependence on routines was
 positively correlated with subscribing to conservativism, nationalisim, and
 authoritarianism, which in turn were positively correlated with support for
 Brexit from the European Union. My work complements these approaches in that
 it considers simpler cognitive factors than personality traits, which I see
-as a composite of opinions and beliefs. Due to the complexity of the
+as a composite of opinions, beliefs, knowledge, etc. Due to the complexity of the
 personality trait construct, it is difficult to tell whether personality traits
 and their relationship to national-scale ideologies and policies
-are biologically or culturally determined~\cite{Claidiere2012c,Smaldino2019d,Falandays2021},
-and so possibly subject to change along with cultural context.
-Some approaches to social influence of knowledge assume mechanisms for generating and
-sharing knowledge, possibly under an assumption of biased 
-assimilation~\cite{Mark1998,Mark1998a,Mark2003}. In the social epistemology approach, 
-knowledge that one behavior is better than another is influenced over two
-channels: one channel is the observation of stochastic payoffs 
-received from taking one action or another; the other influence channel is 
-social, where individuals influence one anothers' beliefs about which behavior is
-more beneficial~\cite{Zollman2007,OConnor2019e}.
+are biologically or culturally determined,
+and so possibly subject to change along with cultural 
+context~\cite{Claidiere2012c,Smaldino2019d,Falandays2021}.
 
 
 \subsection{Social factors contributing to polarization}
@@ -574,23 +588,23 @@ scientifically?
 Who we interact with is somewhat
 random and out of our control: it depends on our family membership, geographic location, 
 participation in social activities (e.g.\ attending school, getting
-groceries, going to a restaurant), etc. In addition to these random factors, 
+groceries, going to a restaurant), and more. In addition to these random factors, 
 we also adjust our social relationships based on interpersonal affinity and similarity, 
 i.e., we tend to prefer to interact with people we like and avoid people we dislike.
 Thinking of these
-evolving relationships as a social network, modeled by a mathematical graph,
+evolving relationships as a social network modeled by a mathematical graph
 enables us to formally represent social relationships and harness graph
 theory to calculate and predict social facts and behavior. For example, graph
 theory can help us predict how quickly information~\cite{Milgram1967,Travers1969}, 
 disease~\cite{Salathe2010,Block2020}, violence~\cite{Epstein2002}, and
 innovations~\cite{Deroiain2002,Acemoglu2011a,Kreindler2014}
-spread in groups and in society~\cite{Milgram1967,Travers1969,Watts1999,Palla2007,Backstrom2012,Wohlgemuth2014}.
+spread in groups and in society~\cite{Watts1999,Palla2007,Backstrom2012,Wohlgemuth2014}.
 
 In social systems people tend to choose social interaction partners who 
 are similar to themselves, a tendency known as \emph{homophily}. As homophily
 increases among a population, this
 increases the chance that individuals interact with similar others, 
-and decreases the chance that individuals will act with dissimilar
+and decreases the chance that individuals will interact with dissimilar
 others~\cite{McPherson2001}. Homophily, then, amplifies the cognitive factor of biased assimilation,
 since increased homophily tends to further insulate individuals from
 exposure to opposing viewpoints as biased assimilation causes individuals to 
@@ -602,10 +616,7 @@ This may be represented as having a greater number of relationships
 with others, so that their opinions are more widely shared~\cite{French1956,Friedkin1986},
 or due to social status, or both~\cite{DeGroot1974}.
 
-To analyze social influence and social relationships, we can use a social 
-network to represent the relationships between individuals
-in groups or societies. 
-Social networks are based on mathematical graph theory. Study 4 uses a network-theoretic
+Study 4 incorporates homophily and random chance in a network-theoretic
 model of social influence to understand how social networks contribute to
 the emergence of extremism and polarization---the model is formally 
 introduced there. Individuals in a social network are represented by \emph{nodes},
@@ -617,15 +628,8 @@ between individuals are represented by \emph{edges}, drawn as lines that connect
 individual nodes.  Homophily and power differentials between individuals 
 may also be represented in terms of edge \emph{weights} on the graph. Any graph
 may have weighted edges which could stand for many different things; in
-navigation applications edge weight might represent the time it takes to reach 
-one location from another. \emph{Temporal} or \emph{dynamic} graphs are graphs that change 
-over time, which in social situations could result from changing affinities,
-geographic relocation, or new communication technologies~\cite{Li2017}. 
-In social influence
-social networks change when, for example, social ties are abandoned when interpersonal
-similarity drops below some threshold~\cite{Axelrod1997,Hegselmann2002,Centola2007,Kossinets2009}.
-
-% Whabout these? \cite{Watts1999,Macy2003,Baldassarri2007, Flache2011,DellaPosta2015,Turner2018,Stewart2020b}
+navigation applications, for example, edge weight might represent the time it takes to reach 
+one location from another. 
 
 \section{Mechanistic models of emergent social phenomena}
 
@@ -641,18 +645,19 @@ emerges from system dynamics specified by the entities and their capacities,
 then the model and its theoretical basis have some explanatory power. 
 A phenomenon \emph{emerges} when a statistical pattern is detected that is 
 associated with that phenomenon, e.g., polarization is often measured as the
-bi-modality of individual opinions (i.e.\ attitudes, beliefs, etc.) in a society.
+bimodality of the distribution of individual opinions (i.e.\ attitudes, beliefs, etc.) in a society.
 The patterns of interest in this dissertation are static (polarization at a given
 point in time) and dynamic~\cite{Kelso1995}, e.g.\ rising extremism and collective changes in 
 violence metaphor use on cable news.
-It is not valid to assume in advance the existence of the phenomenon. 
+It is not valid or explanatory to assume in advance the existence of the phenomenon. 
 
 In this dissertation I use a mechanistic model-based theoretical
-approach designed to (Study 1) explain observed patterns in mass media metaphorical violence use;
-(Study 2) explain rising extremism in socially isolated groups; (Study 3) 
+approach designed to explain observed patterns in mass media metaphorical violence use in
+Study 1;
+explain rising extremism in socially isolated groups in Study 2; 
 demonstrate that many or perhaps most detections of
-rising extremism in socially isolated groups are false detections; and 
-(Study 4) to identify critical determinants social polarization.
+rising extremism in socially isolated groups are false detections in Study 3; and 
+to identify critical determinants social polarization in Study 4.
 
 
 \subsection{Emergent social phenomena}
@@ -683,8 +688,8 @@ or writing statements and documents online that together form a system of
 cultural frames including harmful ethnic, gender, and racial biases and 
 stereotypes~\cite{Caliskan2017,Garg2018}. 
 
-There are also emergent phenomena
-at smaller social scales, such as dyads and other small groups~\cite{Abney2014a}. 
+Emergent phenomena occur at all scales of social influence, 
+including dyads and other small groups~\cite{Abney2014a}. 
 For example, dyads were found to synchronize with one another when working
 together on collaborative tasks, and ``asynchronize'' when in an adversarial 
 relationship~\cite{Abney2014,Ramirez-Aristizabal2018,Schloesser2019,Schneider2020,Abney2021}.
@@ -707,14 +712,15 @@ violence metaphor use varies depending on how soon there will
 be or how recently there has been a presidential debate or the presidential 
 election. This approach
 complements similar approaches to studying time series of semantic content in
-mass media and social media in order to understand how cognitive, cultural, and
+mass media, social media, and other historical documents
+in order to understand how cognitive, cultural, and
 communicative frames covary with historical 
 events~\cite{Nunn2012,Klingenstein2014,Hamilton2016c,Caliskan2017,Barron2018,Garg2018}. 
 Partisan polarization can be identified by analyzing semantic differences in partisan
 communications~\cite{Gentzkow2019}.
 
 From the complex systems perspective, ``pragmatic choice'', i.e.\ what words
-to use when, is the result of many ongoing subprocesses, which occur within
+to use when, is the result of many ongoing subprocesses that occur within
 different contexts~\cite{Gibbs2012a}. The collective attention of society becomes entrained on
 shared cultural events~\cite{Fusaroli2015}. The utterances of news anchors, commentators, and 
 pundits cannot be separated from their pragmatic purpose and societal context~\cite{Kovecses2010}.
@@ -744,30 +750,21 @@ Polarization can increase through repulsive
 influence~\cite{Baldassarri2007,Flache2011,Bail2018,Turner2018}. When dissimilar
 individuals repulsively influence one another, their opinions become more
 extreme in opposite directions, marginally increasing opinion distribution
-bimodality. Polarization can also increase through attractive influence only~\cite{Mas2013,Turner2020},
-e.g., through group polarization.
+bimodality~\cite{Mas2013,Turner2020}. 
+Polarization can also increase through attractive influence 
+only, e.g., through group polarization.
 In group polarization, isolated groups become more extreme as they find consensus. 
-If one group becomes more extreme, polarization also increases
+If one of two groups becomes more extreme, polarization also increases
 since bimodality will have increased. 
 
 \subsection{Model-based theoretical approach}
-
-The Studies I present in this dissertation all develop
-mechanistic models of social influence and mass communications. Studies 1 and
-3 implement mechanistic models as generative, computational statistical models, while
-Studies 2 and 4 implement their social influence models as agent-based models
-of social influence incorporating the cognitive and social factors listed above,
-theorized to be important in the emergence of rising extremism and polarization.
-The dissertation studies are organized based on their approach
-and findings in the study of how rising extremism and polarization emerge
-under mass communications and social influence, not their modeling approach.
 
 Scientific models are simplified versions of reality used to identify which components of
 complex systems are most important in the emergence of collective larger-scale
 phenomena~\cite{Kauffman1970,Wimsatt1972,Wimsatt1997,Machamer2000,Wimsatt2007,Smaldino2017}.
 The most explanatory models are \emph{mechanistic models}, ones that explicitly identify the atomic theoretical 
 entities in a system and how those entities influence one another~\cite{Machamer2000,Craver2006,Turner2021}. 
-In our case mechanistic models of societal and group systems would explain that
+In our case mechanistic models of societal and group systems explain that
 human individuals communicate with and influence those with whom they share
 social connections, with social connections represented as social network neighbors. 
 Above I listed
@@ -814,14 +811,14 @@ factors outlined above. Agent-based models of social systems start
 by defining a computational representation of a person, called
 an \emph{agent}. To implement these models, 
 I wrote computer code that created a world in which computational agents
-were brought to life, made to interact with other agents according to rules and
+were brought to life and made to interact with other agents according to rules and
 assumptions based on the cognitive and social factors outlined above. 
 After thousands or millions of rounds of simulated social interaction I
 measured the distribution of opinions to calculate either a rise in extremism or
 increased polarization.
      
 
-\section{Overview}
+\section{Overview of dissertation results}
 
 Now we have reviewed the overarching problems of extremism polarization that
 motivated this work, the
@@ -853,19 +850,20 @@ for rational thinking due to emotional overwhelm~\cite{Suhay2018} and heightened
 risks of political violence~\cite{Kalmoe2014,Kalmoe2018}.
 
 Study 2 focuses down from
-mass communications to group-level social influence and shifts in extremism.
+mass communications to group-level interpersonal social influence and shifts in extremism.
 In Study 2 I use agent-based modeling to show that group polarization 
 may be driven by the cognitive factor of ``stubborn extremism'', where
 extremists are less susceptible to social influence~\cite{Reiss2019,Zmigrod2019a}.
 To detect group polarization, researchers survey participant
-opinions, assemble participant groups that are biased in one direction or another, and then
-re-survey participants. If the mean of the group opinions changes, then
+opinions, assemble participant groups that are biased in one opinion direction 
+or another, and then re-survey participants. 
+If the mean of the group opinions changes, then
 a group polarization opinion shift is said to occur. Existing explanations of
 group polarization include potentially
 problematic axuiliary assumptions that seem to lack robust empirical support~\cite{Meehl1990}.
 Existing explanations also fail to explicitly account for the observation that
 the magnitude of opinion shifts are positively correlated with initial group
-extremism~\cite{Myers1982}. However, in Study 2 I show that the stubborn extremism explanation
+extremism~\cite{Myers1982}. In Study 2 I show that the stubborn extremism explanation
 also predicts this correlation between initial extremity and opinion shift.
 The stubborn extremism explanation seems more parsimonious in that
 it makes a single, simple, empirically valid assumption that is more explanatory
@@ -875,7 +873,7 @@ In the course of Study 2 I found that many behavioral studies of
 group polarization used a problematic method for measuring group polarization.
 Specifically, many group polarization studies used metric statistical models
 on ordinal data, which is known to sometimes yield false inferences~\cite{Liddell2018}.
-Study 3 uses a generative statistical model to show that, indeed, over 90\% of 
+Study 3, then, develops a generative statistical model to show that, indeed, over 90\% of 
 published detections of group polarization over ten journal articles
 are plausibly false detections. 
 False detections occur due to the fact that extreme opinions are mapped to
@@ -885,7 +883,7 @@ metric statistical models designed to detect whether two distributions of
 models can be tricked into detecting a difference between two distributions' means when
 the data are ordinal measurements of continuous \emph{latent} psychological opinions
 from two distributions with the same mean but different variances. We know that
-opinion variance changes within groups as groups discuss a topic: group members
+opinion variance changes within groups as groups discuss a topic: as group members
 find consensus, i.e., variance decreases.
 
 Finally, in Study 4, I explore how well the
